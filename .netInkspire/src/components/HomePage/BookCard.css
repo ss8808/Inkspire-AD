@@ -1,0 +1,57 @@
+.book-card {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .book-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .book-cover {
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .book-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .book-info {
+    padding: 1rem;
+  }
+  
+  .book-info h3 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    line-height: 1.3;
+  }
+  
+  .author {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+  }
+  
+  .price-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .current-price {
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+  
+  .original-price {
+    font-size: 0.85rem;
+    text-decoration: line-through;
+    color: #888;
+  }
+  

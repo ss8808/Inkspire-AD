@@ -1,0 +1,72 @@
+.profile-page {
+    background-color: #fdf6ec;
+    min-height: 100vh;
+    padding-bottom: 4rem;
+  }
+  
+  .profile-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  
+  .profile-box {
+    background-color: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .profile-box h1 {
+    margin-bottom: 2rem;
+  }
+  
+  .form-section {
+    margin-bottom: 2rem;
+  }
+  
+  .form-section h2 {
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+  }
+  
+  form label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: 500;
+  }
+  
+  form input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .orange-button,
+  .delete-button {
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 1.2rem;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .orange-button {
+    background-color: #e65c00;
+    color: white;
+  }
+  
+  .delete-button {
+    background-color: #ff4d4d;
+    color: white;
+  }
+  

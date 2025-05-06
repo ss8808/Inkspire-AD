@@ -1,0 +1,123 @@
+/* src/HomePage/Navigation.css */
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2.5rem;
+    background-color: var(--background-color);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: all 0.3s ease;
+  }
+  
+  .navigation.scrolled {
+    padding: 0.75rem 2.5rem;
+    background-color: rgba(255, 253, 248, 0.98);
+    backdrop-filter: blur(5px);
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .logo:hover {
+    transform: scale(1.05);
+  }
+  
+  .logo svg {
+    width: 28px;
+    height: 28px;
+    transition: transform 0.3s ease;
+  }
+  
+  .logo:hover svg {
+    transform: rotate(5deg);
+  }
+  
+  .logo h1 {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--text-color);
+    letter-spacing: -0.5px;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 1.05rem;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+  
+  .nav-links a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+  }
+  
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--primary-color);
+  }
+  
+  .nav-links a:hover:after,
+  .nav-links a.active:after {
+    width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .navigation {
+      padding: 1rem 1.25rem;
+    }
+    
+    .logo h1 {
+      font-size: 1.4rem;
+    }
+    
+    .nav-links {
+      gap: 1.5rem;
+    }
+    
+    .nav-links a {
+      font-size: 0.95rem;
+    }
+  }
+  
+  /* Add these JavaScript lines to your Navigation.jsx component for scroll effect:
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      const nav = document.querySelector('.navigation');
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  
+  */

@@ -1,0 +1,100 @@
+.book-management-page {
+    background-color: #fdf3e6;
+    min-height: 100vh;
+    padding-bottom: 4rem;
+  }
+  
+  .book-management-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  
+  /* Form box */
+  .book-management-box {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+  }
+  
+  /* Table box */
+  .book-list-box {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Form styles */
+  .book-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  
+  .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  
+  .form-row label {
+    flex-basis: 100px;
+    font-weight: 600;
+  }
+  
+  .form-row input {
+    flex: 1;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  /* Buttons */
+  .add-button,
+  .edit-button,
+  .delete-button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .add-button {
+    background-color: #e65c00;
+    color: white;
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+  .edit-button {
+    background-color:  #e65c00;
+    color: white;
+    margin-right: 0.5rem;
+  }
+  
+  .delete-button {
+    background-color: #d32f2f;
+    color: white;
+  }
+  
+  /* Table styles */
+  .book-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background-color: white;
+  }
+  
+  .book-table th,
+  .book-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  

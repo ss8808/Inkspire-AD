@@ -1,0 +1,30 @@
+/* src/index.css */
+:root {
+  --primary-color: #E87431;
+  --primary-hover: #d16628;
+  --secondary-color: #333333;
+  --background-color: #FFFDF8;
+  --text-color: #333333;
+  --border-color: #E0E0E0;
+  --card-background: #FFFFFF;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --border-radius: 4px;
+  --font-family: 'Serif', serif;
+  --font-sans: 'Inter', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-family);
+}

@@ -1,0 +1,19 @@
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    .books-container {
+      flex-direction: column;
+    }
+    
+    .filter-sidebar {
+      width: 100%;
+    }
+    
+    .book-grid {
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+  }

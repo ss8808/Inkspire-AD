@@ -1,0 +1,121 @@
+/* Container Layout */
+.confirmation-container {
+    padding: 3rem 1rem;
+    background: #f9f9f9;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  /* Main Confirmation Card */
+  .confirmation-box {
+    max-width: 900px;
+    margin: auto;
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  /* Headings */
+  .confirmation-header {
+    font-size: 2.25rem;
+    font-weight: bold;
+    text-align: center;
+    color: #222;
+    margin-bottom: 0.75rem;
+  }
+  
+  .confirmation-subtext {
+    text-align: center;
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1.25rem;
+  }
+  
+  /* Summary Title */
+  .summary-heading {
+    margin-top: 2.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  /* Summary List */
+  .summary-list {
+    margin-top: 1.5rem;
+  }
+  
+  /* Each Book Entry */
+  .summary-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 1rem;
+  }
+  
+  /* Book Cover Image */
+  .summary-img {
+    width: 70px;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  
+  /* Book Info */
+  .summary-details {
+    flex: 1;
+  }
+  
+  .summary-details h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    color: #111;
+  }
+  
+  .summary-details p {
+    margin: 0.1rem 0;
+    color: #444;
+    font-size: 0.95rem;
+  }
+  
+  /* Code & Pickup Boxes */
+  .summary-boxes {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .summary-box {
+    flex: 1;
+    background: #fafafa;
+    padding: 1.2rem;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .summary-box h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .summary-box p {
+    font-size: 0.95rem;
+    color: #555;
+  }
+  
+  /* Total Price */
+  .summary-total {
+    margin-top: 2rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-align: right;
+    color: #222;
+    border-top: 2px solid #eee;
+    padding-top: 1rem;
+  }
+  

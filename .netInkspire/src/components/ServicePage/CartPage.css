@@ -1,0 +1,133 @@
+.cart-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem;
+    background-color: #fdfdfd;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .cart-left {
+    flex: 2;
+  }
+  
+  .cart-heading {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  
+  .cart-subheading {
+    color: #555;
+    margin-bottom: 1.5rem;
+  }
+  
+  .cart-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .cart-img {
+    width: 80px;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .cart-details {
+    flex: 1;
+  }
+  
+  .cart-details h3 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+  
+  .cart-details p {
+    margin: 0.2rem 0;
+    color: #666;
+  }
+  
+  .cart-price {
+    color: #d9534f;
+    font-weight: bold;
+  }
+  
+  .cart-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .cart-controls button {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #ccc;
+    background: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .cart-controls span {
+    width: 24px;
+    text-align: center;
+  }
+  
+  .remove {
+    background: none;
+    border: none;
+    color: #c00;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .cart-right {
+    flex: 1;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    min-width: 280px;
+  }
+  
+  .summary-box h2 {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+  }
+  
+  .summary-box p {
+    margin: 0.3rem 0;
+    font-size: 1rem;
+  }
+  
+  .checkout-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #e55b2d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .checkout-btn:hover {
+    background-color: #d94b1f;
+  }
+  
+  .discount-note {
+    margin-top: 1rem;
+    color: #2b9348;
+    font-weight: 500;
+    background: #e9f8ef;
+    padding: 0.5rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+  }
+  

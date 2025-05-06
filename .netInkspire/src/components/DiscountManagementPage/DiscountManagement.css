@@ -1,0 +1,93 @@
+.discount-page {
+    background-color:#fdf6ec;
+    min-height: 100vh;
+    padding-bottom: 4rem;
+  }
+  
+  .discount-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .admin-button {
+    background-color: transparent;
+    border: 2px solid #e65c00;
+    color: #e65c00;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .discount-box {
+    background-color: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+  }
+  
+  .discount-form h2,
+  .discount-table h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  
+  .form-group input {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .form-group.dates {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .form-group.dates input {
+    flex: 1;
+  }
+  
+  .apply-button {
+    background-color: #e65c00;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-top: 1rem;
+    cursor: pointer;
+  }
+  
+  .discount-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+  }
+  
+  .discount-table th,
+  .discount-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
