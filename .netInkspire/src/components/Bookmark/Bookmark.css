@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fffaf3;
+  }
+  
+  .bookmark-container {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 1rem;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+    color: #111;
+  }
+  
+  .bookmark-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #111;
+  }
+  
+  .book-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    gap: 1rem;
+  }
+  
+  .book-image {
+    width: 100px;
+    height: auto;
+    border-radius: 0.5rem;
+    object-fit: cover;
+  }
+  
+  .book-details {
+    flex: 1;
+    color: #111;
+  }
+  
+  .book-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  .book-author,
+  .book-price {
+    margin: 0.2rem 0;
+    color: #333;
+  }
+  
+  .book-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .remove {
+    background-color: #ea580c;
+    color: white;
+  }
+  
+  .view {
+    background-color: #d97706;
+    color: white;
+  }
+  
+  .remove:hover {
+    background-color: #c2410c;
+  }
+  
+  .view:hover {
+    background-color: #b45309;
+  }
+
+  .go-inventory {
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    background-color: #d97706;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .go-inventory:hover {
+    background-color:  #b45309;
+  }
+  
+  

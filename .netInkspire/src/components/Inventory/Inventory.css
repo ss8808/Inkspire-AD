@@ -1,0 +1,85 @@
+.inventory-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fffef9;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #111;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #222;
+  }
+  
+  .logo span {
+    margin-left: 8px;
+  }
+  
+  .logout-btn {
+    background-color: #f97316;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  h1 {
+    margin-top: 20px;
+    font-size: 32px;
+    color: #111;
+  }
+  
+  .subtitle {
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .stock-low {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+  }
+  
+  .inventory-table thead {
+    background-color: #f9f6f0;
+    color: #111;
+  }
+  
+  .inventory-table th,
+  .inventory-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    color: #111;
+    
+  }
+  
+  .update-btn {
+    background-color: #f97316;
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+
+  
