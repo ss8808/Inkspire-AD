@@ -6,8 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import './CartPage.css';
 
 
-
-
 const CartPage = () => {
   const { cartItems, incrementQty, decrementQty, removeFromCart } = useCart();
 

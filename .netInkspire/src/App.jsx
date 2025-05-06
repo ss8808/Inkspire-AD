@@ -29,7 +29,6 @@ function App() {
         <Route path="/order-tracker" element={<OrderTracker />} />
         <Route path="/claimverification" element={<ClaimVerification />} />
         <Route path="/orders" element={<Orders />} />
-        <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/review" element={<Review />} /> {/* 👈 Add this line */}
         <Route path="/login" element={<Login />} />
