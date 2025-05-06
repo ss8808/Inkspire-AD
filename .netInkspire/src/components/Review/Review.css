@@ -1,0 +1,118 @@
+body {
+    background-color: #fffaf5;
+    font-family: 'Georgia', serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    font-size: 18px;
+  }
+  
+  .review-header .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .review-header nav a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .review-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .review-box {
+    background-color: #fffdf9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .review-box h1 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 25px;
+  }
+  
+  .book-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .book-info img {
+    height: 120px;
+    margin-right: 20px;
+    border-radius: 6px;
+  }
+  
+  .book-info h3 {
+    margin: 0;
+    font-size: 20px;
+  }
+  
+  .book-info p {
+    margin: 5px 0;
+  }
+  
+  .stars {
+    margin-top: 5px;
+  }
+  
+  .star {
+    color: #ccc;
+    font-size: 22px;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+  .filled {
+    color: #f97316;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  form textarea {
+    padding: 10px;
+    height: 100px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    resize: none;
+  }
+  
+  form button {
+    background-color: #ec6b1e;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  form button:hover {
+    background-color: #d85c10;
+  }
+  
