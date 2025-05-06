@@ -1,0 +1,128 @@
+/* Make the entire page center the form */
+body {
+    background-color: #fef9f4;
+    font-family: 'Georgia', serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  
+  /* Match register container */
+  .login-container {
+    width: 100%;
+    max-width: 500px;
+    background-color: #fffdf9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  /* Header styling */
+  .login-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .login-header .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .login-header a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: black;
+  }
+  
+  /* Form layout matches register */
+  .login-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-form h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .login-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .login-form input {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Forgot password link */
+  .forgot-password {
+    text-align: right;
+    margin-bottom: 15px;
+  }
+  
+  .forgot-password a {
+    font-size: 14px;
+    color: #ec6b1e;
+    text-decoration: none;
+  }
+  
+  /* Login button */
+  .login-form button {
+    background-color: #ec6b1e;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .login-form button:hover {
+    background-color: #d85c10;
+  }
+  
+  /* Role links (Member, Staff, Admin) */
+  .roles {
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  .roles span {
+    margin: 0 10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* Password eye icon wrapper */
+  .password-wrapper {
+    position: relative;
+  }
+  
+  .password-wrapper input {
+    width: 100%;
+    padding-right: 40px;
+    box-sizing: border-box;
+  }
+  
+  .toggle-eye {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+    color: #555;
+  }
+  

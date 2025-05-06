@@ -11,6 +11,9 @@ import Inventory from './components/Inventory/Inventory';
 import OrderTracker from './components/Order/OrderTracker';
 import ClaimVerification from './components/ClaimVerification/ClaimVerification';
 import Orders from './components/Order/Orders';
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
+import Review from './components/Review/Review'; // 👈 Import the new page
 
 function App() {
   return (
@@ -26,6 +29,10 @@ function App() {
         <Route path="/order-tracker" element={<OrderTracker />} />
         <Route path="/claimverification" element={<ClaimVerification />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/review" element={<Review />} /> {/* 👈 Add this line */}
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
