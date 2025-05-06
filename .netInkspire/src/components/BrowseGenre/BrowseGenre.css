@@ -1,0 +1,128 @@
+/* Global reset & background */
+body {
+    background-color: #fdf6ee;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+  }
+  
+  /* Container styling */
+  .container {
+    max-width: 480px;
+    width: 100%;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fdf6ee;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    border-radius: 1rem;
+  }
+  
+  
+  /* Top bar with logo and arrows */
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .back-arrow,
+  .forward-arrow {
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #111;
+  }
+  
+  .book-icon {
+    font-size: 1.8rem;
+    color: #f97316;
+  }
+  
+  /* Header and subtext */
+  .header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    color: #111;
+  }
+  
+  .subtext {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+  
+  /* Genre button grid */
+  .genre-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  
+  .genre-button {
+    padding: 0.5rem 1.2rem;
+    border: 1.5px solid #d1d1d1;
+    border-radius: 999px;
+    cursor: pointer;
+    background-color: #fff;
+    color: #111;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .genre-button:hover {
+    border-color: #f97316;
+    color: #f97316;
+  }
+  
+  .genre-button.selected {
+    background-color: #f97316;
+    color: white;
+    border-color: #f97316;
+  }
+  
+  /* Continue button */
+  .continue-button {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .continue-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .continue-button:not(:disabled):hover {
+    background-color: #222;
+  }
+  

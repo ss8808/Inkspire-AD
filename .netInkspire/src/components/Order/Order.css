@@ -1,0 +1,75 @@
+.orders-wrapper {
+    background-color: #fffdf9;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 32px 24px;
+    font-family: Georgia, serif;
+    color: #111;
+  }
+  
+  .orders-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 32px;
+  }
+  
+  .order-section {
+    margin-bottom: 24px;
+  }
+  
+  .order-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  
+  .order-status {
+    font-size: 20px;
+    font-weight: 600;
+    width: 100px;
+  }
+  
+  .order-status.pending {
+    color: #d14b0f;
+  }
+  
+  .order-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+  }
+  
+  .claim-label {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  
+  .claim-code {
+    font-family: monospace;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .cancel-button {
+    background-color: #d14b0f;
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .cancel-button:hover {
+    background-color: #b33f0d;
+  }
+  
+  .divider {
+    border-top: 1px solid #e6dfd4;
+    margin: 20px 0;
+  }
+  

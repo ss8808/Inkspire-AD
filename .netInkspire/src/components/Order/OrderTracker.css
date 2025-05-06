@@ -1,0 +1,100 @@
+.order-tracker {
+    max-width: 800px;
+    margin: auto;
+    padding: 24px;
+    background-color: #fdf6ec;
+    font-family: sans-serif;
+    color: #333;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header h1 {
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .subheading {
+    margin: 20px 0 10px;
+    font-size: 20px;
+  }
+  
+  .orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+  }
+  
+  .orders-table th,
+  .orders-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .orders-table thead {
+    background-color: #f2d2b0;
+  }
+  
+  .book-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .book-info img {
+    width: 40px;
+    height: 60px;
+    object-fit: cover;
+  }
+  
+  .price {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .member-name {
+    font-weight: bold;
+  }
+  
+  .member-email {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .broadcast h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .broadcast-form {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .broadcast-form input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    color: #111;
+  }
+  
+  .broadcast-form button {
+    padding: 8px 16px;
+    background-color: #f48c06;
+    color: #111;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .broadcast-form button:hover {
+    background-color: #d97706;
+  }
+  
