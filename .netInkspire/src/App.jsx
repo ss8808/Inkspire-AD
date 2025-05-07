@@ -13,7 +13,8 @@ import ClaimVerification from './components/ClaimVerification/ClaimVerification'
 import Orders from './components/Order/Orders';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
-import Review from './components/Review/Review'; // 👈 Import the new page
+import Review from './components/Review/Review'; 
+import Dashboard from './components/AdminDashboard/dashboard';// 👈 Import the new page
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/review" element={<Review />} /> {/* 👈 Add this line */}
         <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<Dashboard />} />
       </Routes>
     </Router>
   );
