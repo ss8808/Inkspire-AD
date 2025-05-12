@@ -15,6 +15,9 @@
   justify-content: center;
   padding: 3rem 2rem;
   box-sizing: border-box;
+  position:relative;
+  top:100px;
+  
 }
 
 .service-container {

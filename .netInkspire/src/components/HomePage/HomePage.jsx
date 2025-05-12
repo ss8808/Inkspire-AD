@@ -8,16 +8,18 @@ import './HomePage.css';
 
 const HomePage = () => {
   return (
+    
     <div className="homepage">
+      
       <Navigation />
       <main>
         <Hero />
         <div className="content-container">
           <h2 className="section-title">Explore Our Collection</h2>
           <div className="books-container">
-            <FilterSidebar />
+            {/* <FilterSidebar /> */}
             <div className="books-content">
-              <BookCategories />
+              {/* <BookCategories /> */}
               <BookGrid />
             </div>
           </div>

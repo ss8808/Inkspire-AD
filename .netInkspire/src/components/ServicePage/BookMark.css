@@ -1,0 +1,32 @@
+.bookmark-page {
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  background-color: #fffdf9;
+  min-height: 100vh;
+}
+
+.bookmark-page h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.bookmark-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.bookmark-card {
+  padding: 1rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  color: #333;
+  transition: transform 0.2s;
+}
+
+.bookmark-card:hover {
+  transform: translateY(-3px);
+  background-color: #fdf1e8;
+}
