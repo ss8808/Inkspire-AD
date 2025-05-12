@@ -34,7 +34,7 @@ function Bookmark() {
       <div className="logo">📖 <span>Inkspire</span></div>
       <h1 className="bookmark-title">Bookmarked</h1>
 
-      {/* ✅ Add this button below the title */}
+      {/*  Add this button below the title */}
       <button className="btn go-inventory" onClick={() => navigate('/inventory')}>
         Go to Inventory
       </button>

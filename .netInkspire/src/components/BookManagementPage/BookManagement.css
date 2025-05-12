@@ -1,100 +1,177 @@
 .book-management-page {
-    background-color: #fdf3e6;
-    min-height: 100vh;
-    padding-bottom: 4rem;
-  }
-  
-  .book-management-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-  }
-  
-  /* Form box */
-  .book-management-box {
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    margin-bottom: 2rem;
-  }
-  
-  /* Table box */
-  .book-list-box {
-    background-color: #fff;
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  }
-  
-  /* Form styles */
-  .book-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
-  
+  background-color: #fffaf3;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  min-height: 100vh;
+  height: auto;
+  overflow-y: auto; /* Enables vertical scrolling */
+  overflow-x: hidden;
+}
+
+.book-management-container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Section card styles */
+.book-management-box,
+.book-list-box {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Headings */
+.book-management-box h1,
+.book-list-box h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+/* Form styles */
+.book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.form-row label {
+  font-weight: 600;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-row input[type="text"],
+.form-row input[type="file"],
+.form-row input[type="number"] {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  min-width: 200px;
+  flex: 1;
+}
+
+/* Checkbox row (for tags like Bestseller etc.) */
+.form-row input[type="checkbox"] {
+  transform: scale(1.2);
+}
+
+/* Buttons */
+.add-button,
+.edit-button,
+.delete-button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.add-button {
+  background-color: #ff6b00;
+  color: white;
+  width: 100%;
+  margin-top: 1rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.add-button:hover {
+  background-color: #e65c00;
+}
+
+.edit-button {
+  background-color: #ffa726;
+  color: white;
+  margin-right: 0.5rem;
+}
+
+.edit-button:hover {
+  background-color: #fb8c00;
+}
+
+.delete-button {
+  background-color: #e53935;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #c62828;
+}
+
+/* Table styles */
+.book-list-box {
+  overflow-x: auto; /* Enables horizontal scrolling */
+}
+
+.book-table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: white;
+}
+
+.book-table th,
+.book-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.book-table th {
+  background-color: #fff3e0;
+  color: #444;
+  font-weight: 600;
+}
+
+/* Optional scrollbar styling */
+.book-list-box::-webkit-scrollbar {
+  height: 8px;
+}
+
+.book-list-box::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
   .form-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
+    flex-direction: column;
   }
-  
-  .form-row label {
-    flex-basis: 100px;
-    font-weight: 600;
-  }
-  
+
+  .form-row label,
   .form-row input {
-    flex: 1;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-  }
-  
-  /* Buttons */
-  .add-button,
-  .edit-button,
-  .delete-button {
-    padding: 0.6rem 1.2rem;
-    border: none;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  .add-button {
-    background-color: #e65c00;
-    color: white;
     width: 100%;
-    margin-top: 1rem;
   }
-  
-  .edit-button {
-    background-color:  #e65c00;
-    color: white;
-    margin-right: 0.5rem;
+
+  .book-management-container {
+    padding: 1.5rem 1rem;
   }
-  
-  .delete-button {
-    background-color: #d32f2f;
-    color: white;
+
+  .book-management-box,
+  .book-list-box {
+    padding: 1.5rem;
   }
-  
-  /* Table styles */
-  .book-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-    background-color: white;
-  }
-  
-  .book-table th,
-  .book-table td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-  }
-  
+}

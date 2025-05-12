@@ -6,6 +6,7 @@ import {
   FaShoppingCart,
   FaBullhorn,
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 function Dashboard() {
   return (
@@ -19,8 +20,10 @@ function Dashboard() {
               Dashboard
             </li>
             <li>
-              <FaBook className="sidebar-icon" />
-              Manage Books
+              <Link to="/book-management" className="sidebar-link">
+                <FaBook className="sidebar-icon" />
+                Manage Books
+              </Link>
             </li>
             <li>
               <FaShoppingCart className="sidebar-icon" />
@@ -85,4 +88,4 @@ function Dashboard() {
   );
 }
 
-export default  Dashboard;
+export default Dashboard;

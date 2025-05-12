@@ -1,92 +1,112 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './BookGrid.css';
 import BookCard from './BookCard';
 import { Link } from 'react-router-dom';
-
-import book1 from '../../assets/img/book1.jpeg';
-import book2 from '../../assets/img/book2.jpeg';
-import book3 from '../../assets/img/book3.jpeg';
-import book4 from '../../assets/img/book4.jpg';
-import book5 from '../../assets/img/book5.jpeg';
-import book6 from '../../assets/img/book6.jpeg';
-import book7 from '../../assets/img/book7.jpeg';
+import FilterSidebar from './FilterSidebar';
+import BookCategories from './BookCategories';
 
 const BookGrid = () => {
-  const books = [
-    {
-      id: 1,
-      image: book1,
-      title: 'The Silent Patient',
-      author: 'Alex Michaelides',
-      price: '14.99'
-    },
-    {
-      id: 2,
-      image: book2,
-      title: 'Where the Crawdads Sing',
-      author: 'Delia Owens',
-      price: '19.99'
-    },
-    {
-      id: 3,
-      image: book3,
-      title: 'The Seven Husbands of Evelyn Hugo',
-      author: 'Taylor Jenkins Reid',
-      price: '16.99'
-    },
-    {
-      id: 4,
-      image: book4,
-      title: "I'm the Stars",
-      author: 'Jane Smith',
-      price: '12.99'
-    },
-    {
-      id: 5,
-      image: book5,
-      title: 'Fin the Stars',
-      author: 'Emily Johnson',
-      price: '18.09'
-    },
-    {
-      id: 6,
-      image: book6,
-      title: 'Final Chance',
-      author: 'Michael Brown',
-      price: '10.99',
-      originalPrice: '16.00'
-    },
-    {
-      id: 7,
-      image: book7,
-      title: "Ocean's Secret",
-      author: 'Sarah Davis',
-      price: '9.99',
-      originalPrice: '16.99'
+  const [allBooks, setAllBooks] = useState([]);
+  const [filteredBooks, setFilteredBooks] = useState([]);
+  const [filters, setFilters] = useState({
+    search: '',
+    genre: [],
+    availability: [],
+    minPrice: '',
+    tags: [],
+    category: ''
+  });
+
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+
+  useEffect(() => {
+    applyFilters();
+  }, [filters]);
+
+  const fetchBooks = async () => {
+    try {
+      const res = await fetch('http://localhost:5136/api/Book');
+      const data = await res.json();
+      setAllBooks(data);
+      setFilteredBooks(data);
+    } catch (error) {
+      console.error('Failed to fetch books:', error);
     }
-  ];
+  };
+
+  const applyFilters = () => {
+    let result = [...allBooks];
+
+    if (filters.search) {
+      const term = filters.search.toLowerCase();
+      result = result.filter(book =>
+        book.title.toLowerCase().includes(term) ||
+        book.description?.toLowerCase().includes(term)
+      );
+    }
+
+    if (filters.genre.length > 0) {
+      result = result.filter(book => filters.genre.includes(book.genre));
+    }
+
+    if (filters.availability.includes('In Stock')) {
+      result = result.filter(book => book.quantityInStock > 0);
+    }
+
+    if (filters.minPrice && !isNaN(filters.minPrice)) {
+      result = result.filter(book => book.price >= parseFloat(filters.minPrice));
+    }
+
+    if (filters.tags.length > 0) {
+      result = result.filter(book =>
+        (filters.tags.includes('Bestseller') && book.isBestseller) ||
+        (filters.tags.includes('Award Winner') && book.isAwardWinner) ||
+        (filters.tags.includes('New Release') && book.isNewRelease) ||
+        (filters.tags.includes('New Arrival') && book.newArrival) ||
+        (filters.tags.includes('Coming Soon') && book.commingSoon)
+      );
+    }
+
+    if (filters.category === 'Deals') {
+      result = result.filter(book => book.originalPrice && book.originalPrice > book.price);
+    }
+
+    setFilteredBooks(result);
+  };
 
   return (
-    <div className="book-grid">
-      {books.map(book => (
-        <Link
-          to={`/service/${book.id}`}
-          key={book.id}
-          className="book-link"
-          state={{ book }} // ✅ fix: pass book object as state
-        >
-          <BookCard
-            image={book.image}
-            title={book.title}
-            author={book.author}
-            price={book.price}
-            originalPrice={book.originalPrice}
-          />
-        </Link>
-      ))}
+    <div style={{ display: 'flex', gap: '2rem' }}>
+      <FilterSidebar filters={filters} setFilters={setFilters} />
+      <div className="book-content">
+        <BookCategories setFilters={setFilters} />
+        <div className="book-grid">
+          {filteredBooks.map(book => (
+            <Link
+              to={`/service/${book.id}`}
+              key={book.id}
+              className="book-link"
+              state={{ book }}
+            >
+              <BookCard
+                image={`http://localhost:5136/${book.coverImageUrl}`}
+                title={book.title}
+                author={book.authorName}
+                price={book.price}
+                originalPrice={book.originalPrice}
+                isBestseller={book.isBestseller}
+                isAwardWinner={book.isAwardWinner}
+                isNewRelease={book.isNewRelease}
+                newArrival={book.newArrival}
+                commingSoon={book.commingSoon}
+              />
+            </Link>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
 
 export default BookGrid;
-  

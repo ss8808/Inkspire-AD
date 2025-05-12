@@ -1,0 +1,32 @@
+/* AdminNavbar.css */
+.admin-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background-color: #fff3e0;
+  border-bottom: 1px solid #e8dccc;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.admin-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #e27023;
+}
+
+.admin-logout {
+  background-color: #ff6b00;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(255, 107, 0, 0.3);
+}
+
+.admin-logout:hover {
+  background-color: #e85e00;
+}

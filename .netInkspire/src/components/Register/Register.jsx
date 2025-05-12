@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import './Register.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -18,13 +21,38 @@ const Register = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (form.password !== form.confirmPassword) {
-      alert("Passwords do not match!");
+      toast.error("Passwords do not match!");
       return;
     }
-    console.log("Registering:", form);
+
+    try {
+      const response = await fetch("http://localhost:5136/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: form.email,
+          password: form.password
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success("Registration successful! Please check your email.");
+        setTimeout(() => navigate("/login"), 2000);
+      } else if (data.errors) {
+        const errorList = Object.values(data.errors).flat();
+        toast.error(errorList[0] || "Registration failed.");
+      } else {
+        toast.error(data.message || "Registration failed.");
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again.");
+    }
   };
 
   return (
@@ -33,7 +61,7 @@ const Register = () => {
         <div className="logo">📖 Inkspire</div>
         <nav>
           <Link to="/">Home</Link>
-          <Link to="/">Login</Link>
+          <Link to="/login">Login</Link>
         </nav>
       </header>
 
@@ -76,6 +104,8 @@ const Register = () => {
 
         <button type="submit">Register</button>
       </form>
+
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
     </div>
   );
 };
