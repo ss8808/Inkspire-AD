@@ -17,6 +17,7 @@ import Review from './components/Review/Review';
 import Dashboard from './components/AdminDashboard/dashboard';
 import BookManagement from './components/BookManagementPage/BookManagement'; 
 
+
 function App() {
   return (
     <Router>
@@ -36,6 +37,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Dashboard />} />
         <Route path="/book-management" element={<BookManagement />} /> {/* ✅ new route */}
+
       </Routes>
     </Router>
   );

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
@@ -8,14 +10,11 @@ body {
 }
 
 .dashboard-container {
- display: flex;
+  display: flex;
   width: 130.8%;
   height: 111.8vh;
   position: relative;
   right: 192.6px;
-  
-  
-  
 }
 
 /* Sidebar */
@@ -75,6 +74,7 @@ body {
   padding: 32px;
   overflow-y: auto;
   min-width: 0;
+  background-color: #fffaf3;
 }
 
 .top-bar {
@@ -175,6 +175,7 @@ h1 {
   padding: 0;
 }
 
+
 .orders li {
   background: #f6f6f6;
   padding: 12px;
@@ -187,6 +188,21 @@ h1 {
 }
 
 /* Announcements */
+
+.announcements {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  margin-top: 20px;
+}
+
+.announcements p {
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+
 .announcement-icon {
   background: #ff6b00;
   color: white;
@@ -204,3 +220,4 @@ h1 {
   font-size: 16px;
   color: #333;
 }
+
