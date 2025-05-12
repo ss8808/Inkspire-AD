@@ -127,12 +127,34 @@
   background-color: #000;
 }
 
-.bookmark-button {
-  font-size: 1.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
+.spinner {
+  animation: spin 1s linear infinite;
+  font-size: 1rem;
 }
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.bookmark-button {
+  background-color: #fff5f5;
+  border: 1px solid #ffa1a1;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bookmark-button:hover {
+  background-color: #ffe5e5;
+}
+
+
+
 
 .secondary-actions {
   display: flex;

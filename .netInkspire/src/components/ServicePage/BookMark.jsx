@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import './BookMark.css';
-import { getUserIdFromToken, getToken } from '../../utils/auth';
 import Navigation from '../HomePage/Navigation';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 
 const BookMark = () => {
-  const userId = getUserIdFromToken();
+  const navigate = useNavigate();
   const [bookmarks, setBookmarks] = useState([]);
+  const token = sessionStorage.getItem('authToken');
+  const userId = sessionStorage.getItem('userId');
 
   useEffect(() => {
+    if (!token || !userId) {
+      toast.error("Please log in to view bookmarks.");
+      navigate('/login');
+      return;
+    }
+
     fetchBookmarks();
   }, []);
 
@@ -16,15 +25,22 @@ const BookMark = () => {
     try {
       const res = await fetch(`http://localhost:5136/api/Bookmark/${userId}`, {
         headers: {
-          Authorization: `Bearer ${getToken()}`
+          Authorization: `Bearer ${token}`
         }
       });
 
       if (!res.ok) throw new Error('Failed to fetch bookmarks');
-      const data = await res.json();
-      setBookmarks(data);
+
+      const result = await res.json();
+
+      if (result?.data) {
+        setBookmarks(result.data);
+      } else {
+        setBookmarks([]);
+      }
     } catch (err) {
       console.error(err.message);
+      toast.error("Failed to load bookmarks.");
     }
   };
 

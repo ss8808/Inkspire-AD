@@ -5,12 +5,16 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+function decodePayload(token) {
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const padded = base64.padEnd(base64.length + (4 - base64.length % 4) % 4, '=');
+  return JSON.parse(atob(padded));
+}
+
 const Login = () => {
   const navigate = useNavigate();
-  const [credentials, setCredentials] = useState({
-    email: '',
-    password: ''
-  });
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
@@ -19,13 +23,11 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     try {
-      const response = await fetch('http://localhost:5136/login', {
+      const response = await fetch('https://localhost:7188/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: credentials.email,
           password: credentials.password,
@@ -33,27 +35,46 @@ const Login = () => {
           twoFactorRecoveryCode: ''
         })
       });
-
+  
       const data = await response.json();
       console.log("Raw login response:", data);
-
+  
       if (response.ok && data?.accessToken) {
-        
-        sessionStorage.setItem('authToken', data.accessToken);
-
-       
+        const token = data.accessToken;
+        sessionStorage.setItem('authToken', token);
+  
+        // ✅ Fetch userId from backend
+        try {
+          const profileRes = await fetch('https://localhost:7188/api/User/profile', {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+  
+          if (profileRes.ok) {
+            const profile = await profileRes.json();
+            sessionStorage.setItem('userId', profile.userId); // ✅ Store userId
+          } else {
+            console.warn("Failed to get user profile.");
+            toast.error("Login succeeded but failed to fetch user data.");
+          }
+        } catch (fetchErr) {
+          console.error("Profile fetch error:", fetchErr);
+          toast.error("Unable to fetch user info.");
+        }
+  
         toast.success('Login Successful!');
         navigate('/home');
       } else {
-        console.warn("Login failed response:", data);
         toast.error(data.message || "Login failed.");
       }
-
+  
     } catch (err) {
-      console.error(" Login error:", err);
+      console.error("Login error:", err);
       toast.error("Network error. Please try again.");
     }
   };
+  
 
   return (
     <div className="login-container">
@@ -86,10 +107,7 @@ const Login = () => {
             onChange={handleChange}
             required
           />
-          <span
-            className="toggle-eye"
-            onClick={() => setShowPassword(!showPassword)}
-          >
+          <span className="toggle-eye" onClick={() => setShowPassword(!showPassword)}>
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </span>
         </div>

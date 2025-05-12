@@ -1,56 +1,112 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './ServiceDescription.css';
 import Navigation from '../HomePage/Navigation';
 import { useCart } from '../context/useCart';
+import { toast } from 'react-toastify';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
+import { ImSpinner2 } from 'react-icons/im';
 
 const ServiceDescription = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { book } = location.state || {}; // Get the book data passed from the previous page
-  const { addToCart, cartItems } = useCart(); // Assuming you have a cart context
-  const userId = sessionStorage.getItem('userId'); // Get user ID from sessionStorage
-  const token = sessionStorage.getItem('authToken'); // Get auth token from sessionStorage
-  const [bookmarked, setBookmarked] = useState(false); // Track if the book is bookmarked
+  const { book } = location.state || {};
+  const { addToCart, cartItems } = useCart();
 
-  // If no book data is provided, show an error message
-  if (!book) {
-    return <p className="error-message">Book not found. Please go back and select a book.</p>;
-  }
+  const token = sessionStorage.getItem('authToken');
+  const userId = sessionStorage.getItem('userId');
+  const [bookmarked, setBookmarked] = useState(false);
+  const [bookmarkId, setBookmarkId] = useState(null);
+  const [loadingBookmarkStatus, setLoadingBookmarkStatus] = useState(true);
+  const [bookmarkActionLoading, setBookmarkActionLoading] = useState(false);
 
-  // Check if the book is already in the cart
   const alreadyInCart = cartItems.find((item) => item.id === book.id);
 
-  // Function to handle bookmarking the book
-  const handleBookmark = async () => {
-    // Check if user is logged in
+  useEffect(() => {
+    if (!book || !userId || !token) return;
+
+    const fetchBookmarkStatus = async () => {
+      try {
+        const res = await fetch(`http://localhost:5136/api/Bookmark/${userId}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          const existing = data.data?.find((bm) => bm.bookId === book.id);
+          if (existing) {
+            setBookmarked(true);
+            setBookmarkId(existing.id);
+          }
+        }
+      } catch (err) {
+        console.error("Bookmark check failed:", err);
+      } finally {
+        setLoadingBookmarkStatus(false);
+      }
+    };
+
+    fetchBookmarkStatus();
+  }, [book, userId, token]);
+
+  const handleBookmarkToggle = async () => {
     if (!userId || !token) {
-      console.log('User not logged in:', { userId, token });
-      alert("You must be logged in to bookmark this book.");
+      toast.error("You must be logged in.");
+      navigate('/login');
+      return;
+    }
+
+    // 🛡️ Prevent toggle until initial bookmark status is loaded
+    if (loadingBookmarkStatus) {
+      toast.info("Please wait, checking bookmark status...");
       return;
     }
 
     try {
-      // Send POST request to the backend to add the book to bookmarks
-      const res = await fetch(`http://localhost:5136/api/Bookmark/${userId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}` // Send the token for authentication
-        },
-        body: JSON.stringify({ bookId: book.id }) // Send the bookId in the request body
-      });
+      setBookmarkActionLoading(true);
 
-      if (!res.ok) {
-        throw new Error(await res.text()); // If response is not OK, throw an error
+      if (bookmarked && bookmarkId) {
+        const res = await fetch(`http://localhost:5136/api/Bookmark/${bookmarkId}/user/${userId}`, {
+          method: 'DELETE',
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!res.ok) throw new Error(await res.text());
+
+        toast.success("Bookmark removed.");
+        setBookmarked(false);
+        setBookmarkId(null);
+      } else {
+        const res = await fetch(`http://localhost:5136/api/Bookmark/${userId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ bookId: book.id })
+        });
+
+        if (!res.ok) {
+          const errMsg = await res.text();
+          throw new Error(errMsg || 'Failed to bookmark');
+        }
+
+        const result = await res.json();
+        setBookmarked(true);
+        setBookmarkId(result.id);
+        toast.success("Bookmarked successfully!");
       }
-
-      setBookmarked(true); // Mark the book as bookmarked
-      alert("Bookmarked successfully!"); // Show success message
     } catch (err) {
-      alert(err.message); // Show error if something goes wrong
+      toast.error(err.message);
+      console.error("Bookmark toggle error:", err.message);
+    } finally {
+      setBookmarkActionLoading(false);
     }
   };
+
+  if (!book) {
+    return <p className="error-message">Book not found.</p>;
+  }
 
   return (
     <>
@@ -59,7 +115,11 @@ const ServiceDescription = () => {
         <div className="service-container">
           <div className="service-hero">
             <div className="image-wrapper">
-              <img src={`http://localhost:5136/${book.coverImageUrl}`} alt={book.title} className="service-cover" />
+              <img
+                src={`http://localhost:5136/${book.coverImageUrl}`}
+                alt={book.title}
+                className="service-cover"
+              />
             </div>
 
             <div className="service-info">
@@ -83,18 +143,43 @@ const ServiceDescription = () => {
 
               <div className="actions">
                 <button className="start-button">Start reading</button>
-                <button className="bookmark-button" onClick={handleBookmark} disabled={bookmarked}>
-                  🔖 {bookmarked ? 'Bookmarked' : 'Bookmark'}
-                </button>
+
+                {loadingBookmarkStatus ? (
+                  <button className="bookmark-button" disabled>
+                    <ImSpinner2 className="spinner" />
+                    <span style={{ marginLeft: '8px' }}>Checking...</span>
+                  </button>
+                ) : (
+                  <button
+                    className="bookmark-button"
+                    onClick={handleBookmarkToggle}
+                    disabled={bookmarkActionLoading}
+                  >
+                    {bookmarkActionLoading ? (
+                      <ImSpinner2 className="spinner" />
+                    ) : bookmarked ? (
+                      <FaHeart color="red" />
+                    ) : (
+                      <FaRegHeart />
+                    )}
+                    <span style={{ marginLeft: '8px' }}>
+                      {bookmarked ? 'Bookmarked' : 'Bookmark'}
+                    </span>
+                  </button>
+                )}
               </div>
 
               <div className="secondary-actions">
-                <button className="cart-button" disabled={alreadyInCart} onClick={() => {
-                  if (!alreadyInCart) {
-                    addToCart(book); // Add the book to cart
-                    navigate('/cart');
-                  }
-                }}>
+                <button
+                  className="cart-button"
+                  disabled={alreadyInCart}
+                  onClick={() => {
+                    if (!alreadyInCart) {
+                      addToCart(book);
+                      navigate('/cart');
+                    }
+                  }}
+                >
                   🛒 {alreadyInCart ? 'Added' : 'Add to Cart'}
                 </button>
                 <button className="guidelines-button">📘 Content Guidelines</button>
@@ -110,9 +195,7 @@ const ServiceDescription = () => {
             </div>
           </div>
 
-          <p className="description">
-            {book.description || "No description available."}
-          </p>
+          <p className="description">{book.description || "No description available."}</p>
         </div>
       </section>
     </>
