@@ -1,8 +1,8 @@
 import React from 'react';
 import Navigation from './Navigation';
 import Hero from './Hero';
-import FilterSidebar from './FilterSidebar';
-import BookCategories from './BookCategories';
+// import FilterSidebar from './FilterSidebar';
+// import BookCategories from './BookCategories';
 import BookGrid from './BookGrid';
 import './HomePage.css';
 

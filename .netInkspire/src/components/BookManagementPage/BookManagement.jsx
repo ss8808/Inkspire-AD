@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './Bookmanagement.css';
-import Navigation from '../AdminDashboard/AdminNavbar';
+import Sidebar from '../AdminDashboard/Sidebar';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AdminNavbar from '../AdminDashboard/AdminNavbar';
 
 function BookManagement() {
   const [books, setBooks] = useState([]);
   const [editingBookId, setEditingBookId] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [newBook, setNewBook] = useState({
     isbn: '',
     title: '',
@@ -147,83 +147,92 @@ function BookManagement() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  return (
-    
-    <div className="book-management-page">
-      <AdminNavbar/>
-      <div className="book-management-container">
-        <div className="book-management-box">
-          <h1>Book Management</h1>
-          <form className="book-form" onSubmit={(e) => e.preventDefault()}>
-            <div className="form-row">
-              <label>Title</label>
-              <input type="text" name="title" value={newBook.title} onChange={handleInputChange} />
-              <label>Price</label>
-              <input type="text" name="price" value={newBook.price} onChange={handleInputChange} />
-            </div>
-            <div className="form-row">
-              <label>Author</label>
-              <input type="text" name="author" value={newBook.author} onChange={handleInputChange} />
-              <label>Stock</label>
-              <input type="text" name="stock" value={newBook.stock} onChange={handleInputChange} />
-            </div>
-            <div className="form-row">
-              <label>Format</label>
-              <input type="text" name="format" value={newBook.format} onChange={handleInputChange} />
-              <label>Publisher</label>
-              <input type="text" name="publisher" value={newBook.publisher} onChange={handleInputChange} />
-            </div>
-            <div className="form-row">
-              <label>Language</label>
-              <input type="text" name="language" value={newBook.language} onChange={handleInputChange} />
-              <label>ISBN</label>
-              <input type="text" name="isbn" value={newBook.isbn} onChange={handleInputChange} />
-            </div>
-            <div className="form-row">
-              <label>Cover Image</label>
-              <input type="file" name="coverImage" onChange={handleInputChange} />
-            </div>
-            <div className="form-row">
-              <label><input type="checkbox" name="isBestseller" checked={newBook.isBestseller} onChange={handleInputChange} /> Bestseller</label>
-              <label><input type="checkbox" name="isAwardWinner" checked={newBook.isAwardWinner} onChange={handleInputChange} /> Award Winner</label>
-              <label><input type="checkbox" name="isNewRelease" checked={newBook.isNewRelease} onChange={handleInputChange} /> New Release</label>
-              <label><input type="checkbox" name="newArrival" checked={newBook.newArrival} onChange={handleInputChange} /> New Arrival</label>
-              <label><input type="checkbox" name="commingSoon" checked={newBook.commingSoon} onChange={handleInputChange} /> Coming Soon</label>
-            </div>
-            <button className="add-button" onClick={handleAddOrUpdateBook}>
-              {editingBookId ? 'Update Book' : 'Add New Book'}
-            </button>
-          </form>
-        </div>
+  const closeSidebar = () => {
+    if (window.innerWidth < 992) {
+      setSidebarOpen(false);
+    }
+  };
 
-        <div className="book-list-box">
-          <h2>All Books</h2>
-          <table className="book-table">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Price</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {books.map((book) => (
-                <tr key={book.id}>
-                  <td>{book.title}</td>
-                  <td>{book.authorName}</td>
-                  <td>${book.price}</td>
-                  <td>
-                    <button className="edit-button" onClick={() => handleEditBook(book)}>Edit</button>
-                    <button className="delete-button" onClick={() => handleDeleteBook(book.id)}>Delete</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+  return (
+    <div className="dashboard-container">
+      <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
+      <div className="main-content">
+        <div className="book-management-page">
+          <div className="book-management-container">
+            <div className="book-management-box">
+              <h1>Book Management</h1>
+              <form className="book-form" onSubmit={(e) => e.preventDefault()}>
+                <div className="form-row">
+                  <label>Title</label>
+                  <input type="text" name="title" value={newBook.title} onChange={handleInputChange} />
+                  <label>Price</label>
+                  <input type="text" name="price" value={newBook.price} onChange={handleInputChange} />
+                </div>
+                <div className="form-row">
+                  <label>Author</label>
+                  <input type="text" name="author" value={newBook.author} onChange={handleInputChange} />
+                  <label>Stock</label>
+                  <input type="text" name="stock" value={newBook.stock} onChange={handleInputChange} />
+                </div>
+                <div className="form-row">
+                  <label>Format</label>
+                  <input type="text" name="format" value={newBook.format} onChange={handleInputChange} />
+                  <label>Publisher</label>
+                  <input type="text" name="publisher" value={newBook.publisher} onChange={handleInputChange} />
+                </div>
+                <div className="form-row">
+                  <label>Language</label>
+                  <input type="text" name="language" value={newBook.language} onChange={handleInputChange} />
+                  <label>ISBN</label>
+                  <input type="text" name="isbn" value={newBook.isbn} onChange={handleInputChange} />
+                </div>
+                <div className="form-row">
+                  <label>Cover Image</label>
+                  <input type="file" name="coverImage" onChange={handleInputChange} />
+                </div>
+                <div className="form-row">
+                  <label><input type="checkbox" name="isBestseller" checked={newBook.isBestseller} onChange={handleInputChange} /> Bestseller</label>
+                  <label><input type="checkbox" name="isAwardWinner" checked={newBook.isAwardWinner} onChange={handleInputChange} /> Award Winner</label>
+                  <label><input type="checkbox" name="isNewRelease" checked={newBook.isNewRelease} onChange={handleInputChange} /> New Release</label>
+                  <label><input type="checkbox" name="newArrival" checked={newBook.newArrival} onChange={handleInputChange} /> New Arrival</label>
+                  <label><input type="checkbox" name="commingSoon" checked={newBook.commingSoon} onChange={handleInputChange} /> Coming Soon</label>
+                </div>
+                <button className="add-button" onClick={handleAddOrUpdateBook}>
+                  {editingBookId ? 'Update Book' : 'Add New Book'}
+                </button>
+              </form>
+            </div>
+
+            <div className="book-list-box">
+              <h2>All Books</h2>
+              <table className="book-table">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {books.map((book) => (
+                    <tr key={book.id}>
+                      <td>{book.title}</td>
+                      <td>{book.authorName}</td>
+                      <td>${book.price}</td>
+                      <td>
+                        <button className="edit-button" onClick={() => handleEditBook(book)}>Edit</button>
+                        <button className="delete-button" onClick={() => handleDeleteBook(book.id)}>Delete</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
+        <ToastContainer position="top-right" autoClose={3000} hideProgressBar newestOnTop />
       </div>
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar newestOnTop />
     </div>
   );
 }

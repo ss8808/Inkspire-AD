@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import './DiscountManagement.css';
-import AdminNavbar from '../AdminDashboard/AdminNavbar';
+import Sidebar from '../AdminDashboard/Sidebar';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const DiscountManagement = () => {
   const [discounts, setDiscounts] = useState([]);
   const [books, setBooks] = useState([]);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [formData, setFormData] = useState({
     bookId: '',
     discountPercentage: '',
@@ -107,113 +108,123 @@ const DiscountManagement = () => {
     }
   };
 
+  const closeSidebar = () => {
+    if (window.innerWidth < 992) {
+      setSidebarOpen(false);
+    }
+  };
+
   return (
-    <div className="discount-page">
-      <AdminNavbar />
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
+    <div className="dashboard-container">
+      <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
+      <div className="main-content">
+        <div className="discount-page">
+          <ToastContainer position="top-right" autoClose={3000} hideProgressBar />
 
-      <div className="discount-content">
-        <div className="header-row">
-          <h1>Discount Management</h1>
-        </div>
-
-        <div className="discount-box">
-          <section className="discount-form">
-            <h2>Apply Discount</h2>
-            <div className="form-group">
-              <label>Select Book</label>
-              <select name="bookId" value={formData.bookId} onChange={handleChange}>
-                <option value="">-- Select Book --</option>
-                {books.map(book => (
-                  <option key={book.id} value={book.id}>{book.title}</option>
-                ))}
-              </select>
+          <div className="discount-content">
+            <div className="header-row">
+              <h1>Discount Management</h1>
             </div>
 
-            <div className="form-group">
-              <label>Discount (%)</label>
-              <input
-                type="number"
-                name="discountPercentage"
-                value={formData.discountPercentage}
-                onChange={handleChange}
-              />
+            <div className="discount-box">
+              <section className="discount-form">
+                <h2>Apply Discount</h2>
+                <div className="form-group">
+                  <label>Select Book</label>
+                  <select name="bookId" value={formData.bookId} onChange={handleChange}>
+                    <option value="">-- Select Book --</option>
+                    {books.map(book => (
+                      <option key={book.id} value={book.id}>{book.title}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label>Discount (%)</label>
+                  <input
+                    type="number"
+                    name="discountPercentage"
+                    value={formData.discountPercentage}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="form-group dates">
+                  <label>Start Date</label>
+                  <input
+                    type="date"
+                    name="startDate"
+                    value={formData.startDate}
+                    onChange={handleChange}
+                  />
+                  <label>End Date</label>
+                  <input
+                    type="date"
+                    name="endDate"
+                    value={formData.endDate}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="onSale"
+                      checked={formData.onSale}
+                      onChange={handleChange}
+                    />
+                    On Sale
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="isActive"
+                      checked={formData.isActive}
+                      onChange={handleChange}
+                    />
+                    Active
+                  </label>
+                </div>
+
+                <button className="apply-button" onClick={handleSubmit}>Apply Discount</button>
+              </section>
             </div>
 
-            <div className="form-group dates">
-              <label>Start Date</label>
-              <input
-                type="date"
-                name="startDate"
-                value={formData.startDate}
-                onChange={handleChange}
-              />
-              <label>End Date</label>
-              <input
-                type="date"
-                name="endDate"
-                value={formData.endDate}
-                onChange={handleChange}
-              />
+            <div className="discount-box">
+              <section className="discount-table">
+                <h2>Existing Discounts</h2>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Book ID</th>
+                      <th>Discount (%)</th>
+                      <th>Start</th>
+                      <th>End</th>
+                      <th>On Sale</th>
+                      <th>Active</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {discounts.map(d => (
+                      <tr key={d.id}>
+                        <td>{d.bookId}</td>
+                        <td>{d.discountPercentage}</td>
+                        <td>{new Date(d.startDate).toLocaleDateString()}</td>
+                        <td>{new Date(d.endDate).toLocaleDateString()}</td>
+                        <td>{d.onSale ? 'Yes' : 'No'}</td>
+                        <td>{d.isActive ? 'Yes' : 'No'}</td>
+                        <td>
+                          <button className="delete-button" onClick={() => handleDelete(d.id)}>Delete</button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </section>
             </div>
-
-            <div className="form-group">
-              <label>
-                <input
-                  type="checkbox"
-                  name="onSale"
-                  checked={formData.onSale}
-                  onChange={handleChange}
-                />
-                On Sale
-              </label>
-              <label>
-                <input
-                  type="checkbox"
-                  name="isActive"
-                  checked={formData.isActive}
-                  onChange={handleChange}
-                />
-                Active
-              </label>
-            </div>
-
-            <button className="apply-button" onClick={handleSubmit}>Apply Discount</button>
-          </section>
-        </div>
-
-        <div className="discount-box">
-          <section className="discount-table">
-            <h2>Existing Discounts</h2>
-            <table>
-              <thead>
-                <tr>
-                  <th>Book ID</th>
-                  <th>Discount (%)</th>
-                  <th>Start</th>
-                  <th>End</th>
-                  <th>On Sale</th>
-                  <th>Active</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {discounts.map(d => (
-                  <tr key={d.id}>
-                    <td>{d.bookId}</td>
-                    <td>{d.discountPercentage}</td>
-                    <td>{new Date(d.startDate).toLocaleDateString()}</td>
-                    <td>{new Date(d.endDate).toLocaleDateString()}</td>
-                    <td>{d.onSale ? 'Yes' : 'No'}</td>
-                    <td>{d.isActive ? 'Yes' : 'No'}</td>
-                    <td>
-                      <button className="delete-button" onClick={() => handleDelete(d.id)}>Delete</button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
+          </div>
         </div>
       </div>
     </div>

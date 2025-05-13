@@ -1,98 +1,102 @@
-/* src/HomePage/FilterSidebar.css */
+/* FilterSidebar.css - Scoped to avoid layout conflict */
 .filter-sidebar {
-    width: 240px;
-    flex-shrink: 0;
-  }
-  
-  .filter-sidebar h2 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-  }
-  
-  .search-box {
-    margin-bottom: 1.5rem;
-  }
-  
-  .search-box input {
+  width: 260px;
+  background-color: #fff9f4;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid #f2e2d2;
+  flex-shrink: 0;
+}
+
+.filter-sidebar h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1.25rem;
+  font-weight: bold;
+  color: #d75d11;
+}
+
+.search-box {
+  margin-bottom: 1.5rem;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-color: #fffefc;
+}
+
+.filter-section {
+  margin-bottom: 1.75rem;
+}
+
+.filter-section h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.checkbox-item input[type="checkbox"] {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.checkbox-item label {
+  font-size: 0.95rem;
+  color: #444;
+  cursor: pointer;
+}
+
+.price-range {
+  margin-top: 0.5rem;
+}
+
+.price-input {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.price-input input {
+  flex: 1;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background-color: #fffefb;
+}
+
+/* Responsive for smaller devices */
+@media (max-width: 768px) {
+  .filter-sidebar {
     width: 100%;
-    padding: 0.75rem;
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
   }
-  
-  .filter-section {
-    margin-bottom: 1.5rem;
-  }
-  
+
   .filter-section h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.75rem;
+    font-size: 1rem;
   }
-  
-  .checkbox-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-  
+
   .checkbox-item label {
     font-size: 0.9rem;
   }
-  
-  .price-range {
-    margin-top: 0.5rem;
-  }
-  
-  .price-input {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-  
+
   .price-input input {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
+    font-size: 0.9rem;
   }
-  
-  .slider {
-    width: 100%;
-    margin: 1rem 0;
-  }
-  
-  .price-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.8rem;
-  }
-  
-  .apply-filters-button {
-    width: 100%;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 0.75rem;
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .apply-filters-button:hover {
-    background-color: var(--primary-hover);
-  }
-  
-  /* Responsive styles */
-  @media (max-width: 768px) {
-    .filter-sidebar {
-      width: 100%;
-    }
-    
-    .filter-section {
-      margin-bottom: 1rem;
-    }
-  }
+}

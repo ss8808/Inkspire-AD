@@ -1,100 +1,174 @@
+/* OrderTracker.css */
+
 .order-tracker {
-    max-width: 800px;
-    margin: auto;
-    padding: 24px;
-    background-color: #fdf6ec;
-    font-family: sans-serif;
-    color: #333;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .header h1 {
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .subheading {
-    margin: 20px 0 10px;
-    font-size: 20px;
-  }
-  
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  color: #333;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.header h1 {
+  font-size: 32px;
+  color: #e27023;
+  margin-bottom: 0.3rem;
+}
+
+.sub-header {
+  font-size: 15px;
+  color: #888;
+}
+
+.subheading {
+  font-size: 20px;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+  background-color: #fffdf9;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.orders-table th,
+.orders-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  font-size: 14px;
+}
+
+.orders-table th {
+  background-color: #ffe6cc;
+  color: #444;
+  font-weight: 600;
+}
+
+.book-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.book-info img {
+  width: 40px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.book-title {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.price {
+  font-size: 13px;
+  color: #888;
+}
+
+.member-name {
+  font-weight: bold;
+}
+
+.member-email {
+  font-size: 13px;
+  color: #777;
+}
+
+.status {
+  font-weight: 600;
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+  display: inline-block;
+  text-align: center;
+}
+
+.status.pending {
+  background-color: #fff4e5;
+  color: #d97300;
+}
+
+.status.completed {
+  background-color: #e0fbe0;
+  color: #2e7d32;
+}
+
+.status.cancelled {
+  background-color: #ffe6e6;
+  color: #d32f2f;
+}
+
+/* Claim code panel */
+.order-completion-panel {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 10px;
+  background-color: #fef2e6;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.order-completion-panel h2 {
+  font-size: 18px;
+  margin-bottom: 1rem;
+  color: #d35400;
+}
+
+.claim-input-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.claim-input-row input {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.complete-btn {
+  background-color: #e27023;
+  color: white;
+  font-weight: 600;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.complete-btn:hover {
+  background-color: #c7601b;
+}
+
+@media screen and (max-width: 768px) {
   .orders-table {
+    min-width: unset;
+  }
+
+  .claim-input-row {
+    flex-direction: column;
+  }
+
+  .complete-btn {
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 30px;
   }
-  
-  .orders-table th,
-  .orders-table td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  .orders-table thead {
-    background-color: #f2d2b0;
-  }
-  
-  .book-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .book-info img {
-    width: 40px;
-    height: 60px;
-    object-fit: cover;
-  }
-  
-  .price {
-    font-size: 14px;
-    color: #666;
-  }
-  
-  .member-name {
-    font-weight: bold;
-  }
-  
-  .member-email {
-    font-size: 14px;
-    color: #666;
-  }
-  
-  .broadcast h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .broadcast-form {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .broadcast-form input {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: white;
-    color: #111;
-  }
-  
-  .broadcast-form button {
-    padding: 8px 16px;
-    background-color: #f48c06;
-    color: #111;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .broadcast-form button:hover {
-    background-color: #d97706;
-  }
-  
+}
