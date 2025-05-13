@@ -5,12 +5,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function decodePayload(token) {
-  const base64Url = token.split('.')[1];
-  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  const padded = base64.padEnd(base64.length + (4 - base64.length % 4) % 4, '=');
-  return JSON.parse(atob(padded));
-}
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -22,58 +17,66 @@ const Login = () => {
   };
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-  
-    try {
-      const response = await fetch('https://localhost:7188/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: credentials.email,
-          password: credentials.password,
-          twoFactorCode: '',
-          twoFactorRecoveryCode: ''
-        })
-      });
-  
-      const data = await response.json();
-      console.log("Raw login response:", data);
-  
-      if (response.ok && data?.accessToken) {
-        const token = data.accessToken;
-        sessionStorage.setItem('authToken', token);
-  
-        // ✅ Fetch userId from backend
-        try {
-          const profileRes = await fetch('https://localhost:7188/api/User/profile', {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          });
-  
-          if (profileRes.ok) {
-            const profile = await profileRes.json();
-            sessionStorage.setItem('userId', profile.userId); // ✅ Store userId
-          } else {
-            console.warn("Failed to get user profile.");
-            toast.error("Login succeeded but failed to fetch user data.");
+  e.preventDefault();
+
+  try {
+    const response = await fetch('https://localhost:7188/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: credentials.email,
+        password: credentials.password,
+        twoFactorCode: '',
+        twoFactorRecoveryCode: ''
+      })
+    });
+
+    const data = await response.json();
+    console.log("Raw login response:", data);
+
+    if (response.ok && data?.accessToken) {
+      const token = data.accessToken;
+      sessionStorage.setItem('authToken', token);
+
+      try {
+        const profileRes = await fetch('https://localhost:7188/api/User/profile', {
+          headers: {
+            Authorization: `Bearer ${token}`
           }
-        } catch (fetchErr) {
-          console.error("Profile fetch error:", fetchErr);
-          toast.error("Unable to fetch user info.");
+        });
+
+        if (profileRes.ok) {
+          const profile = await profileRes.json();
+          const userId = profile.userId;
+          sessionStorage.setItem('userId', userId); // ✅ Store userId
+
+          toast.success('Login Successful!');
+
+          // ✅ Redirect based on userId
+          if (Number(userId) === 1) {
+            navigate('/admin');
+          } else {
+            navigate('/');
+          }
+
+        } else {
+          console.warn("Failed to get user profile.");
+          toast.error("Login succeeded but failed to fetch user data.");
         }
-  
-        toast.success('Login Successful!');
-        navigate('/home');
-      } else {
-        toast.error(data.message || "Login failed.");
+      } catch (fetchErr) {
+        console.error("Profile fetch error:", fetchErr);
+        toast.error("Unable to fetch user info.");
       }
-  
-    } catch (err) {
-      console.error("Login error:", err);
-      toast.error("Network error. Please try again.");
+    } else {
+      toast.error(data.message || "Login failed.");
     }
-  };
+
+  } catch (err) {
+    console.error("Login error:", err);
+    toast.error("Network error. Please try again.");
+  }
+};
+
   
 
   return (
