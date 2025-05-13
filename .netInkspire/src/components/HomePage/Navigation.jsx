@@ -2,6 +2,8 @@
 import React from 'react';
 import './Navigation.css';
 import { BookIcon } from '../../assets/Icons';
+import { FaBookmark } from 'react-icons/fa'; // ✅ import icon
+import { Link } from 'react-router-dom'; // ✅ use Link for SPA routing
 
 const Navigation = () => {
   return (
@@ -11,10 +13,13 @@ const Navigation = () => {
         <h1>Inkspire</h1>
       </div>
       <div className="nav-links">
-        <a href="/" className="active">Home</a>
-        <a href="/Register">Register</a>
-        <a href="/Login">Login</a>
-        <a href="/about">About</a>
+        <Link to="/" className="active">Home</Link>
+        <Link to="/Register">Register</Link>
+        <Link to="/Login">Login</Link>
+        <Link to="/about">About</Link>
+        <Link to="/bookmarks">
+          <FaBookmark style={{ marginRight: '6px' }} />
+        </Link>
       </div>
     </nav>
   );

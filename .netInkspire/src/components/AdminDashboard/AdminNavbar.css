@@ -1,4 +1,4 @@
-/* AdminNavbar.css */
+/* Topbar Container */
 .admin-topbar {
   display: flex;
   justify-content: space-between;
@@ -7,14 +7,19 @@
   background-color: #fff3e0;
   border-bottom: 1px solid #e8dccc;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
+/* Brand Logo */
 .admin-logo {
   font-size: 24px;
   font-weight: bold;
   color: #e27023;
 }
 
+/* Logout Button */
 .admin-logout {
   background-color: #ff6b00;
   color: white;
@@ -25,8 +30,28 @@
   border-radius: 6px;
   cursor: pointer;
   box-shadow: 0 3px 8px rgba(255, 107, 0, 0.3);
+  transition: background-color 0.2s ease-in-out;
 }
 
 .admin-logout:hover {
   background-color: #e85e00;
+}
+
+/* Responsive: For screens smaller than tablets (768px) */
+@media (max-width: 768px) {
+  .admin-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+
+  .admin-logo {
+    font-size: 20px;
+  }
+
+  .admin-logout {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
 }
