@@ -153,7 +153,73 @@
   background-color: #ffe5e5;
 }
 
+.review-section {
+  margin-top: 2rem;
+  border-top: 1px solid #eee;
+  padding-top: 1.5rem;
+}
 
+.review-btn {
+  background-color: #fff3e0;
+  border: 1px solid #ffb74d;
+  color: #e65100;
+  padding: 0.7rem 1.4rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.review-btn:hover {
+  background-color: #ffe0b2;
+}
+
+.review-form {
+  margin-top: 1.2rem;
+  background: #fff9f4;
+  padding: 1.5rem;
+  border-radius: 10px;
+  border: 1px solid #ffcc80;
+}
+
+.review-form label {
+  display: block;
+  font-weight: 600;
+  margin: 0.75rem 0 0.3rem;
+}
+
+.review-form select,
+.review-form textarea {
+  width: 100%;
+  font-size: 1rem;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.review-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.submit-review-btn {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 0.7rem 1.4rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.submit-review-btn:hover {
+  background-color: #e64a19;
+}
 
 
 .secondary-actions {

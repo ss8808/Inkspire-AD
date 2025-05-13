@@ -1,55 +1,91 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Order.css';
+import { toast } from 'react-toastify';
 
 export default function Orders() {
-  const [orders, setOrders] = useState({
-    pending: ['73P6-KDV2QM'],
-    cancelled: ['9YVJ-4XQNHC'],
-    fulfilled: ['RKZ8-JJFNRE'],
-  });
+  const [orders, setOrders] = useState([]);
+  const token = sessionStorage.getItem('authToken');
 
-  const cancelOrder = (code) => {
-    setOrders((prev) => ({
-      pending: prev.pending.filter((c) => c !== code),
-      cancelled: [...prev.cancelled, code],
-      fulfilled: prev.fulfilled,
-    }));
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const res = await fetch('https://localhost:7188/api/Order/user-history', {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (!res.ok) throw new Error("Failed to fetch");
+
+        const data = await res.json();
+        setOrders(data);
+      } catch (err) {
+        toast.error("Unable to load orders.");
+      }
+    };
+
+    fetchOrders();
+  }, [token]);
+
+  const cancelOrder = async (claimCode) => {
+    try {
+      const res = await fetch('https://localhost:7188/api/Order/cancel', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(claimCode)
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) throw new Error(result.message);
+
+      toast.success(result.message);
+      setOrders((prev) =>
+        prev.map(o => o.claimCode === claimCode ? { ...o, status: 'Cancelled' } : o)
+      );
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   return (
     <div className="orders-wrapper">
       <h1 className="orders-title">Orders</h1>
 
-      <div className="order-section">
-        <div className="order-row">
-          <div className="order-status pending">Pending</div>
-          <div className="order-content">
-            <div className="claim-label">Claim Code</div>
-            <div className="claim-code">{orders.pending[0]}</div>
+      {orders.map((order) => (
+        <div key={order.orderId} className="order-section">
+          <div className="order-row">
+            <div className={`order-status ${order.status.toLowerCase()}`}>
+              {order.status}
+            </div>
+
+            <div className="order-content">
+              <div className="claim-label">Claim Code</div>
+              <div className="claim-code">{order.claimCode}</div>
+
+              <div className="book-list">
+                {order.books.map((book, i) => (
+                  <div key={i} className="book-item">
+                    <div><strong>{book.title}</strong></div>
+                    <div>Quantity: {book.quantity}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div>Total: ${order.finalAmount.toFixed(2)}</div>
+              <div>Date: {new Date(order.orderDate).toLocaleDateString()}</div>
+            </div>
+
+            {order.status !== 'Completed' && order.status !== 'Cancelled' && (
+              <button className="cancel-button" onClick={() => cancelOrder(order.claimCode)}>
+                Cancel
+              </button>
+            )}
           </div>
-          <button className="cancel-button" onClick={() => cancelOrder(orders.pending[0])}>
-            Cancel
-          </button>
+
         </div>
-      </div>
-
-      <div className="divider"></div>
-
-      <div className="order-section">
-        <div className="order-row">
-          <div className="order-status">Cancelled</div>
-          <div className="claim-code">{orders.cancelled[0]}</div>
-        </div>
-      </div>
-
-      <div className="divider"></div>
-
-      <div className="order-section">
-        <div className="order-row">
-          <div className="order-status">Fulfilled</div>
-          <div className="claim-code">{orders.fulfilled[0]}</div>
-        </div>
-      </div>
+      ))}
     </div>
   );
 }

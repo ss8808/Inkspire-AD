@@ -25,10 +25,13 @@ function Dashboard() {
                 Manage Books
               </Link>
             </li>
-            <li>
-              <FaShoppingCart className="sidebar-icon" />
-              Manage Orders
-            </li>
+              <li>
+          <Link to="/order-tracker" className="sidebar-link">
+            <FaShoppingCart className="sidebar-icon" />
+            Manage Orders
+          </Link>
+        </li>
+ 
             <li>
               <Link to="/add-announcement" className="sidebar-link">
                 <FaBullhorn className="sidebar-icon" />

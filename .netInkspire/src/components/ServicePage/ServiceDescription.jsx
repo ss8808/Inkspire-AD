@@ -13,12 +13,19 @@ const ServiceDescription = () => {
 
   const token = sessionStorage.getItem('authToken');
   const userId = sessionStorage.getItem('userId');
+
   const [bookmarked, setBookmarked] = useState(false);
   const [bookmarkId, setBookmarkId] = useState(null);
   const [loadingBookmarkStatus, setLoadingBookmarkStatus] = useState(true);
   const [bookmarkActionLoading, setBookmarkActionLoading] = useState(false);
   const [addingToCart, setAddingToCart] = useState(false);
-  const [alreadyInCart, setAlreadyInCart] = useState(false); // Local check if needed
+  const [alreadyInCart, setAlreadyInCart] = useState(false);
+
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [rating, setRating] = useState(5);
+  const [comment, setComment] = useState('');
+  const [submittingReview, setSubmittingReview] = useState(false);
+  const [hasReviewed, setHasReviewed] = useState(false);
 
   useEffect(() => {
     if (!book || !userId || !token) return;
@@ -44,7 +51,23 @@ const ServiceDescription = () => {
       }
     };
 
+    const checkIfReviewed = async () => {
+      try {
+        const res = await fetch(`https://localhost:7188/api/Review/has-reviewed/${book.id}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (res.ok) {
+          const result = await res.json();
+          setHasReviewed(result.hasReviewed);
+        }
+      } catch (err) {
+        console.error("Failed to check review status:", err.message);
+      }
+    };
+
     fetchBookmarkStatus();
+    checkIfReviewed();
   }, [book, userId, token]);
 
   const handleBookmarkToggle = async () => {
@@ -135,6 +158,47 @@ const ServiceDescription = () => {
     }
   };
 
+  const handleSubmitReview = async () => {
+    if (!token || !userId) {
+      toast.error('Please log in to submit a review.');
+      navigate('/login');
+      return;
+    }
+
+    try {
+      setSubmittingReview(true);
+      const res = await fetch('https://localhost:7188/api/Review', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          bookId: book.id,
+          rating,
+          comment
+        })
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.message || 'Failed to submit review');
+      }
+
+      toast.success("Thank you! Your review was submitted.");
+      setShowReviewForm(false);
+      setComment('');
+      setRating(5);
+      setHasReviewed(true);
+    } catch (err) {
+      console.error('Review error:', err.message);
+      toast.error(err.message);
+    } finally {
+      setSubmittingReview(false);
+    }
+  };
+
   if (!book) return <p className="error-message">Book not found.</p>;
 
   return (
@@ -172,7 +236,6 @@ const ServiceDescription = () => {
 
               <div className="actions">
                 <button className="start-button">Start reading</button>
-
                 {loadingBookmarkStatus ? (
                   <button className="bookmark-button" disabled>
                     <ImSpinner2 className="spinner" />
@@ -214,6 +277,48 @@ const ServiceDescription = () => {
                   )}
                 </button>
                 <button className="guidelines-button">📘 Content Guidelines</button>
+              </div>
+
+              {/* Review Section */}
+              <div className="review-section">
+                <button
+                  className="review-btn"
+                  onClick={() => setShowReviewForm(!showReviewForm)}
+                  disabled={hasReviewed}
+                >
+                  ✍️ {hasReviewed ? 'Review Submitted' : showReviewForm ? 'Cancel Review' : 'Leave a Review'}
+                </button>
+
+                {showReviewForm && (
+                  <div className="review-form">
+                    <label>
+                      Rating:
+                      <select value={rating} onChange={(e) => setRating(Number(e.target.value))}>
+                        {[5, 4, 3, 2, 1].map(r => (
+                          <option key={r} value={r}>{r}</option>
+                        ))}
+                      </select>
+                    </label>
+
+                    <label>
+                      Comment:
+                      <textarea
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                        rows="4"
+                        placeholder="Write your thoughts..."
+                      />
+                    </label>
+
+                    <button
+                      className="submit-review-btn"
+                      onClick={handleSubmitReview}
+                      disabled={submittingReview}
+                    >
+                      {submittingReview ? 'Submitting...' : 'Submit Review'}
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>

@@ -31,7 +31,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/service/:id" element={<ServiceDescription />} />
         <Route path="/order-confirmation" element={<OrderConfirmation />} />
         <Route path="/cart" element={<CartPage />} />
@@ -40,7 +40,7 @@ function App() {
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/order-tracker" element={<OrderTracker />} />
         <Route path="/claimverification" element={<ClaimVerification />} />
-        <Route path="/orders" element={<Orders />} />
+        <Route path="/MyOrders" element={<Orders />} />
         <Route path="/register" element={<Register />} />
         <Route path="/review" element={<Review />} /> 
         <Route path="/login" element={<Login />} />
