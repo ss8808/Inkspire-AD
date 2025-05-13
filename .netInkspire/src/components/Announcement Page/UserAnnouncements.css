@@ -1,0 +1,19 @@
+/* src/components/Announcement Page/UserAnnouncements.css */
+.user-announcement-page {
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.announcement-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.announcement-card {
+  background-color: #fff8f0;
+  padding: 1.2rem;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}

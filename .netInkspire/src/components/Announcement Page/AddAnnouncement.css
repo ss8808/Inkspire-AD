@@ -65,5 +65,25 @@
     resize: vertical;
     font-family: inherit;
   }
-  
+  .top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigate-btn {
+  background-color: #444cc6;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.navigate-btn:hover {
+  background-color: #3434a8;
+}
+
   

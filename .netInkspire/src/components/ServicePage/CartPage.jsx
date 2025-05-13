@@ -23,34 +23,79 @@ const CartPage = () => {
     fetchCart();
   }, [token, userId]);
 
+  // const fetchCart = async () => {
+    // try {
+      // setLoading(true);
+      // const res = await fetch(`https://localhost:7188/api/Cart/${userId}`, {
+        // headers: { Authorization: `Bearer ${token}` },
+      // });
+
+      // if (!res.ok) throw new Error('Failed to fetch cart');
+
+      // const cartData = await res.json();
+
+      // const detailedItems = await Promise.all(
+        // cartData.items.map(async (item) => {
+          // const bookRes = await fetch(`https://localhost:7188/api/Book/${item.bookId}`);
+          // if (!bookRes.ok) throw new Error('Failed to fetch book details');
+          // const book = await bookRes.json();
+          // return { ...book, quantity: item.quantity };
+        // })
+      // );
+
+      // setCartItems(detailedItems);
+    // } catch (err) {
+      // console.error('Error fetching cart:', err.message);
+      // toast.error("Unable to load cart.");
+    // } finally {
+      // setLoading(false);
+    // }
+  // };
+
   const fetchCart = async () => {
-    try {
-      setLoading(true);
-      const res = await fetch(`https://localhost:7188/api/Cart/${userId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+  try {
+    setLoading(true);
 
-      if (!res.ok) throw new Error('Failed to fetch cart');
+    // Step 1: Get cart
+    const res = await fetch(`https://localhost:7188/api/Cart/${userId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) throw new Error('Failed to fetch cart');
+    const cartData = await res.json();
 
-      const cartData = await res.json();
+    // Step 2: Get active discounts
+    const discountRes = await fetch(`https://localhost:7188/api/Discount/discounted-books`);
+    const discounts = await discountRes.json();
 
-      const detailedItems = await Promise.all(
-        cartData.items.map(async (item) => {
-          const bookRes = await fetch(`https://localhost:7188/api/Book/${item.bookId}`);
-          if (!bookRes.ok) throw new Error('Failed to fetch book details');
-          const book = await bookRes.json();
-          return { ...book, quantity: item.quantity };
-        })
-      );
+    // Step 3: Build detailed item list with discounts
+    const detailedItems = await Promise.all(
+      cartData.items.map(async (item) => {
+        const bookRes = await fetch(`https://localhost:7188/api/Book/${item.bookId}`);
+        if (!bookRes.ok) throw new Error('Failed to fetch book details');
+        const book = await bookRes.json();
 
-      setCartItems(detailedItems);
-    } catch (err) {
-      console.error('Error fetching cart:', err.message);
-      toast.error("Unable to load cart.");
-    } finally {
-      setLoading(false);
-    }
-  };
+        // Match discount
+        const discount = discounts.find(d => d.bookId === item.bookId);
+        const discountedPrice = discount ? discount.discountedPrice : book.price;
+
+        return {
+          ...book,
+          price: discountedPrice,
+          originalPrice: book.price,
+          quantity: item.quantity
+        };
+      })
+    );
+
+    setCartItems(detailedItems);
+  } catch (err) {
+    console.error('Error fetching cart:', err.message);
+    toast.error("Unable to load cart.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const updateQuantity = async (bookId, newQty) => {
     try {

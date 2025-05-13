@@ -30,11 +30,19 @@ function Dashboard() {
               Manage Orders
             </li>
             <li>
-          <Link to="/add-announcement" className="sidebar-link">
-            <FaBullhorn className="sidebar-icon" />
-            Manage Announcements
-          </Link>
-        </li>
+              <Link to="/add-announcement" className="sidebar-link">
+                <FaBullhorn className="sidebar-icon" />
+                Manage Announcements
+              </Link>
+            </li>
+
+             <li>
+              <Link to="/discount" className="sidebar-link">
+                <FaBullhorn className="sidebar-icon" />
+                Manage Discount
+              </Link>
+            </li>
+
           
           </ul>
         </nav>

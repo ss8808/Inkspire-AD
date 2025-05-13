@@ -18,13 +18,13 @@ const Hero = () => {
         </div>
       </div>
 
-      <div className="features">
-        {['Fast Delivery', 'Curated Selection', 'Member Discounts', 'Archived Editions'].map((feature, index) => (
-          <div className="feature-card" key={index}>
-            <span>{feature}</span>
-          </div>
-        ))}
-      </div>
+      {/* <div className="features"> */}
+        {/* {['Fast Delivery', 'Curated Selection', 'Member Discounts', 'Archived Editions'].map((feature, index) => ( */}
+          {/* // <div className="feature-card" key={index}> */}
+            {/* <span>{feature}</span> */}
+          {/* </div> */}
+        {/* // ))} */}
+      {/* </div> */}
     </section>
   );
 };
