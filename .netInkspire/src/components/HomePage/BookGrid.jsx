@@ -27,12 +27,36 @@ const BookGrid = () => {
 
   const fetchBooks = async () => {
     try {
-      const res = await fetch('http://localhost:5136/api/Book');
-      const data = await res.json();
-      setAllBooks(data);
-      setFilteredBooks(data);
+      const [booksRes, discountsRes] = await Promise.all([
+        fetch('http://localhost:5136/api/Book'),
+        fetch('http://localhost:5136/api/Discount/discounted-books')
+      ]);
+
+      const booksData = await booksRes.json();
+      const discountsData = await discountsRes.json();
+
+      const mergedBooks = booksData.map(book => {
+        const discount = discountsData.find(d => d.bookId === book.id);
+        if (discount) {
+          const end = new Date(discount.discountEnd);
+          const now = new Date();
+          const daysRemaining = Math.max(Math.ceil((end - now) / (1000 * 60 * 60 * 24)), 0);
+
+          return {
+            ...book,
+            originalPrice: book.price,
+            price: discount.discountedPrice,
+            discountPercentage: discount.discountPercentage,
+            daysRemaining
+          };
+        }
+        return book;
+      });
+
+      setAllBooks(mergedBooks);
+      setFilteredBooks(mergedBooks);
     } catch (error) {
-      console.error('Failed to fetch books:', error);
+      console.error('Failed to fetch books or discounts:', error);
     }
   };
 
@@ -95,6 +119,8 @@ const BookGrid = () => {
                 author={book.authorName}
                 price={book.price}
                 originalPrice={book.originalPrice}
+                discountPercentage={book.discountPercentage}
+                daysRemaining={book.daysRemaining}
                 isBestseller={book.isBestseller}
                 isAwardWinner={book.isAwardWinner}
                 isNewRelease={book.isNewRelease}

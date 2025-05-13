@@ -19,7 +19,12 @@ import Dashboard from './components/AdminDashboard/dashboard';
 import BookManagement from './components/BookManagementPage/BookManagement'; 
 import BookMarks from './components/ServicePage/BookMarks';
 import AddAnnouncement from './components/Announcement Page/AddAnnouncement';
+import DiscountManagement from './components/DiscountManagementPage/DiscountManagement';
+import ManageAnnouncements from './components/Announcement Page/ManageAnnouncement';
+import UserAnnouncements from './components/Announcement Page/UserAnnouncements';
 // import { BookmarkProvider } from './ServicePage/BookMarkProvider';
+// import UserAnnouncements from './components/Announcement Page/UserAnnouncements';
+
 
 
 function App() {
@@ -43,7 +48,11 @@ function App() {
         <Route path="/book-management" element={<BookManagement />} /> {/* ✅ new route */}
         <Route path="/bookmarks" element={<BookMarks/>}/>
         <Route path="/add-announcement" element={<AddAnnouncement />} />
+        <Route path="/manage-announcements" element={<ManageAnnouncements />} />
+        <Route path="/discount" element={<DiscountManagement />} />
         {/* <Route path="/bookmarkProvider" element={<BookMarkProvider/>}/> */}
+        {/* <Route path="/announcements" element={<UserAnnouncements />} /> */}
+         <Route path="/announcements" element={<UserAnnouncements/>} />
 
       </Routes>
     </Router>

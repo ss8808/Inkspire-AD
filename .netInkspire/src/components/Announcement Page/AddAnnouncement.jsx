@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './AddAnnouncement.css';
 import AdminNavbar from '../AdminDashboard/AdminNavbar';
+import { useNavigate } from 'react-router-dom';
+
 
 const AddAnnouncement = () => {
   const [title, setTitle] = useState('');
@@ -8,6 +10,8 @@ const AddAnnouncement = () => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
 
   const handleSubmit = async () => {
     if (!title || !message || !startDate || !endDate) {
@@ -18,23 +22,22 @@ const AddAnnouncement = () => {
     const dto = {
       title,
       content: message,
-      startDate,
-      endDate,
+      startDate: new Date(startDate).toISOString(),
+      endDate: new Date(endDate).toISOString(),
       isActive: true
     };
 
-    console.log('Payload:', dto);
+    console.log('Sending DTO:', dto);
     setLoading(true);
 
     try {
       const response = await fetch('https://localhost:7188/api/Announcement', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(dto)
-});
-
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dto)
+      });
 
       if (response.ok) {
         alert('✅ Announcement added successfully!');
@@ -55,7 +58,7 @@ const AddAnnouncement = () => {
       }
     } catch (error) {
       console.error('Submission Error:', error);
-      alert('❌ Server error. Check the console or try again later.');
+      alert('❌ Server error. Please try again later.');
     } finally {
       setLoading(false);
     }
@@ -67,6 +70,13 @@ const AddAnnouncement = () => {
       <div className="announcement-container">
         <div className="announcement-box">
           <h1>Add Announcement</h1>
+
+        <button
+            className="view-announcement-button"
+            onClick={() => navigate('/manage-announcements')}
+              >
+            📢 View Your Announcements
+           </button>
 
           <div className="form-group">
             <label>Title</label>
@@ -106,7 +116,11 @@ const AddAnnouncement = () => {
             />
           </div>
 
-          <button className="submit-button" onClick={handleSubmit} disabled={loading}>
+          <button
+            className="submit-button"
+            onClick={handleSubmit}
+            disabled={loading}
+          >
             {loading ? 'Submitting...' : 'Add Announcement'}
           </button>
         </div>
