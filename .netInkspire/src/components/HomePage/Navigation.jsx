@@ -4,7 +4,8 @@ import './Navigation.css';
 import { BookIcon } from '../../assets/Icons';
 import { FaBookmark } from 'react-icons/fa'; // ✅ import icon
 import { Link } from 'react-router-dom'; // ✅ use Link for SPA routing
-import { MdCampaign } from 'react-icons/md'
+import { FaBullhorn } from 'react-icons/fa';
+
 const Navigation = () => {
   return (
     <nav className="navigation">
@@ -16,13 +17,14 @@ const Navigation = () => {
         <Link to="/" className="active">Home</Link>
         <Link to="/Register">Register</Link>
         <Link to="/Login">Login</Link>
-        <Link to="/about">About</Link>
+        <Link to="/MyOrders">Orders</Link>
         <Link to="/bookmarks">
           <FaBookmark style={{ marginRight: '6px' }} />
         </Link>
         <Link to="/announcements">
-          <MdCampaign style={{ marginRight: '6px' }} />
+          <FaBullhorn style={{ marginRight: '6px' }} />
         </Link>
+
       </div>
     </nav>
   );

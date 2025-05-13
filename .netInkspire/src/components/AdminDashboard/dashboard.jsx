@@ -1,63 +1,101 @@
-import React from 'react';
-import './dashboard.css';
+import React, { useState } from 'react';
+import './Dashboard.css';
 import {
   FaTachometerAlt,
   FaBook,
   FaShoppingCart,
   FaBullhorn,
+  FaPercentage,
+  FaBars
 } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-function Dashboard() {
+export default function Dashboard() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    // Clear session data
+    sessionStorage.clear();
+    // In a real app this would redirect to login
+    alert("Logged out successfully");
+    navigate('/login');
+  };
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  // Close sidebar when clicking outside on mobile
+  const closeSidebar = () => {
+    if (window.innerWidth < 992) {
+      setSidebarOpen(false);
+    }
+  };
+
   return (
     <div className="dashboard-container">
-      <aside className="sidebar">
-        <h2 className="logo">Inkspire</h2>
+      {/* Mobile sidebar backdrop */}
+      {sidebarOpen && (
+        <div className="sidebar-backdrop" onClick={closeSidebar}></div>
+      )}
+
+      {/* Sidebar */}
+      <aside className={`sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
+        <div className="logo">Inkspire</div>
+        
         <nav>
           <ul>
             <li className="active">
-              <FaTachometerAlt className="sidebar-icon" />
-              Dashboard
+              <a href="/admin">
+                <FaTachometerAlt className="sidebar-icon" />
+                Dashboard
+              </a>
             </li>
             <li>
-              <Link to="/book-management" className="sidebar-link">
+              <a href="/book-management">
                 <FaBook className="sidebar-icon" />
                 Manage Books
-              </Link>
+              </a>
             </li>
-              <li>
-          <Link to="/order-tracker" className="sidebar-link">
-            <FaShoppingCart className="sidebar-icon" />
-            Manage Orders
-          </Link>
-        </li>
- 
             <li>
-              <Link to="/add-announcement" className="sidebar-link">
+              <a href="/order-tracker">
+                <FaShoppingCart className="sidebar-icon" />
+                Manage Orders
+              </a>
+            </li>
+            <li>
+              <a href="/book-management">
                 <FaBullhorn className="sidebar-icon" />
                 Manage Announcements
-              </Link>
+              </a>
             </li>
-
-             <li>
-              <Link to="/discount" className="sidebar-link">
-                <FaBullhorn className="sidebar-icon" />
+            <li>
+              <a href="/discount">
+                <FaPercentage className="sidebar-icon" />
                 Manage Discount
-              </Link>
+              </a>
             </li>
-
-          
           </ul>
         </nav>
       </aside>
 
-      <main className="main-content">
-        <header className="top-bar">
-          <button className="logout">Logout</button>
-        </header>
+      {/* Main content */}
+      <div className="main-content">
+        <div className="top-bar">
+          {/* Mobile menu button */}
+          <button className="menu-toggle" onClick={toggleSidebar}>
+            <FaBars />
+          </button>
+          
+          <button className="logout" onClick={handleLogout}>
+            Logout
+          </button>
+        </div>
 
         <h1>Admin Dashboard</h1>
 
+        {/* Summary Cards */}
         <div className="summary-cards">
           <div className="card">
             <p>Books in Stock</p>
@@ -77,12 +115,28 @@ function Dashboard() {
           </div>
         </div>
 
+        {/* Main Grid */}
         <div className="main-grid">
+          {/* Chart Section */}
           <div className="chart">
             <p>Book Stock Status</p>
-            <div className="bar" style={{ height: '160px' }}></div>
+            <div className="chart-bars">
+              <div className="bar-container">
+                <div className="bar" style={{ height: '80%', backgroundColor: '#ff6b00' }}></div>
+              </div>
+              <div className="bar-container">
+                <div className="bar" style={{ height: '60%', backgroundColor: '#ff8c3a' }}></div>
+              </div>
+              <div className="bar-container">
+                <div className="bar" style={{ height: '90%', backgroundColor: '#ffad70' }}></div>
+              </div>
+              <div className="bar-container">
+                <div className="bar" style={{ height: '50%', backgroundColor: '#ffcca8' }}></div>
+              </div>
+            </div>
           </div>
 
+          {/* Orders Section */}
           <div className="orders">
             <p>Recent Orders</p>
             <ul>
@@ -91,15 +145,29 @@ function Dashboard() {
               <li>#1047 – Apr 13, 2024 – $50.85</li>
             </ul>
           </div>
+        </div>
 
-          <div className="announcements">
-            <p>Active Announcements</p>
-            <div className="announcement-icon">!</div>
+        {/* Announcements Section (in a separate row) */}
+        <div className="announcements">
+          <p>Active Announcements</p>
+          <div className="announcement-list">
+            <div className="announcement-item">
+              <div className="announcement-icon">!</div>
+              <div className="announcement-content">
+                <p className="announcement-title">Summer Sale</p>
+                <p className="announcement-desc">All books 20% off</p>
+              </div>
+            </div>
+            <div className="announcement-item">
+              <div className="announcement-icon">!</div>
+              <div className="announcement-content">
+                <p className="announcement-title">New Arrivals</p>
+                <p className="announcement-desc">Added 15 new titles</p>
+              </div>
+            </div>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
-
-export default Dashboard;

@@ -1,128 +1,248 @@
-/* Make the entire page center the form */
-body {
-    background-color: #fef9f4;
-    font-family: 'Georgia', serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-  }
-  
-  /* Match register container */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Login Page Layout */
+.login-page {
+  background-color: #fef9f4;
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Container Styling */
+.login-container {
+  width: 100%;
+  max-width: 450px;
+  background-color: #fffdf9;
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(236, 107, 30, 0.08);
+  transition: all 0.3s ease;
+}
+
+/* Header Styling */
+.login-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: #ec6b1e;
+}
+
+.logo-icon {
+  margin-right: 8px;
+  font-size: 22px;
+}
+
+.header-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 15px;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #ec6b1e;
+}
+
+/* Form Styling */
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form h2 {
+  font-size: 26px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.form-subtitle {
+  color: #777;
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  transition: border-color 0.2s ease;
+  background-color: #fff;
+}
+
+.form-group input:focus {
+  border-color: #ec6b1e;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(236, 107, 30, 0.1);
+}
+
+.form-group input::placeholder {
+  color: #aaa;
+}
+
+/* Password Field */
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-eye {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #777;
+  font-size: 16px;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-eye:hover {
+  color: #ec6b1e;
+}
+
+/* Forgot Password Link */
+.forgot-password {
+  text-align: right;
+  margin-bottom: 24px;
+}
+
+.forgot-password a {
+  font-size: 14px;
+  color: #ec6b1e;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.forgot-password a:hover {
+  color: #d85c10;
+  text-decoration: underline;
+}
+
+/* Login Button */
+.login-button {
+  background-color: #ec6b1e;
+  color: white;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin-bottom: 20px;
+}
+
+.login-button:hover {
+  background-color: #d85c10;
+}
+
+.login-button:active {
+  transform: translateY(1px);
+}
+
+.login-button.loading {
+  background-color: #f0914f;
+  cursor: not-allowed;
+}
+
+/* Register Prompt */
+.register-prompt {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+
+.register-prompt a {
+  color: #ec6b1e;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.register-prompt a:hover {
+  color: #d85c10;
+  text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 480px) {
   .login-container {
-    width: 100%;
-    max-width: 500px;
-    background-color: #fffdf9;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    position: relative;
+    padding: 24px;
   }
   
-  /* Header styling */
   .login-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-  
-  .login-header .logo {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .login-header a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: black;
-  }
-  
-  /* Form layout matches register */
-  .login-form {
-    display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
   }
   
-  .login-form h2 {
-    font-size: 32px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .login-form label {
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .login-form input {
-    margin-bottom: 15px;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  /* Forgot password link */
-  .forgot-password {
-    text-align: right;
-    margin-bottom: 15px;
-  }
-  
-  .forgot-password a {
-    font-size: 14px;
-    color: #ec6b1e;
-    text-decoration: none;
-  }
-  
-  /* Login button */
-  .login-form button {
-    background-color: #ec6b1e;
-    color: white;
-    padding: 12px;
-    font-size: 16px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  .login-form button:hover {
-    background-color: #d85c10;
-  }
-  
-  /* Role links (Member, Staff, Admin) */
-  .roles {
-    text-align: center;
-    margin-top: 15px;
-  }
-  
-  .roles span {
-    margin: 0 10px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  /* Password eye icon wrapper */
-  .password-wrapper {
-    position: relative;
-  }
-  
-  .password-wrapper input {
+  .header-nav {
     width: 100%;
-    padding-right: 40px;
-    box-sizing: border-box;
+    justify-content: space-between;
   }
   
-  .toggle-eye {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 18px;
-    color: #555;
+  .form-group input {
+    padding: 10px 14px;
   }
   
+  .login-button {
+    padding: 12px;
+  }
+}
+
+/* Toast Notification Custom Styling */
+.Toastify__toast {
+  border-radius: 8px;
+  padding: 12px 20px;
+}
+
+.Toastify__toast--success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.Toastify__toast--error {
+  background-color: #ffebee;
+  color: #c62828;
+}
