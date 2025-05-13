@@ -91,18 +91,4 @@ body {
   .view:hover {
     background-color: #b45309;
   }
-
-  .go-inventory {
-    margin: 1rem 0;
-    padding: 0.5rem 1rem;
-    background-color: #d97706;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  .go-inventory:hover {
-    background-color:  #b45309;
-  }
-  
   

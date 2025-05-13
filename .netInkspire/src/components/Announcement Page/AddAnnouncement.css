@@ -2,6 +2,8 @@
     background-color: #fdf6ec;
     min-height: 100vh;
     padding-bottom: 4rem;
+    position:relative;
+    top:100px;
   }
   
   .announcement-container {

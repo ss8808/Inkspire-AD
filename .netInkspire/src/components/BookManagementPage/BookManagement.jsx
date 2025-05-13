@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Bookmanagement.css';
-import Navigation from '../HomePage/Navigation';
+import Navigation from '../AdminDashboard/AdminNavbar';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AdminNavbar from '../AdminDashboard/AdminNavbar';
 
 function BookManagement() {
   const [books, setBooks] = useState([]);
@@ -30,7 +31,7 @@ function BookManagement() {
 
   const fetchBooks = async () => {
     try {
-      const res = await fetch('http://localhost:5136/api/Book');
+      const res = await fetch('https://localhost:7188/api/Book');
       const data = await res.json();
       setBooks(data);
     } catch (error) {
@@ -76,8 +77,8 @@ function BookManagement() {
     try {
       const response = await fetch(
         editingBookId
-          ? `http://localhost:5136/api/Book/${editingBookId}`
-          : 'http://localhost:5136/api/Book',
+          ? `https://localhost:7188/api/Book/${editingBookId}`
+          : 'https://localhost:7188/api/Book',
         {
           method: editingBookId ? 'PUT' : 'POST',
           body: formData
@@ -114,7 +115,7 @@ function BookManagement() {
   const handleDeleteBook = async (id) => {
     if (!window.confirm('Are you sure you want to delete this book?')) return;
     try {
-      await fetch(`http://localhost:5136/api/Book/${id}`, {
+      await fetch(`https://localhost:7188/api/Book/${id}`, {
         method: 'DELETE'
       });
       fetchBooks();
@@ -148,7 +149,7 @@ function BookManagement() {
 
   return (
     <div className="book-management-page">
-      <Navigation />
+      <AdminNavbar/>
       <div className="book-management-container">
         <div className="book-management-box">
           <h1>Book Management</h1>

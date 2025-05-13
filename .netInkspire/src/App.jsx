@@ -7,6 +7,7 @@ import OrderConfirmation from './components/ServicePage/OrderConfirmation';
 import CartPage from './components/ServicePage/CartPage';
 import BrowseGenre from './components/BrowseGenre/BrowseGenre';
 import Bookmark from './components/Bookmark/Bookmark';
+// import Bookmarks from './components/ServicePage/Bookmarks';
 import Inventory from './components/Inventory/Inventory';
 import OrderTracker from './components/Order/OrderTracker';
 import ClaimVerification from './components/ClaimVerification/ClaimVerification';
@@ -16,6 +17,9 @@ import Register from './components/Register/Register';
 import Review from './components/Review/Review'; 
 import Dashboard from './components/AdminDashboard/dashboard';
 import BookManagement from './components/BookManagementPage/BookManagement'; 
+import BookMarks from './components/ServicePage/BookMarks';
+import AddAnnouncement from './components/Announcement Page/AddAnnouncement';
+// import { BookmarkProvider } from './ServicePage/BookMarkProvider';
 
 
 function App() {
@@ -35,8 +39,11 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/review" element={<Review />} /> 
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/admin" element={<Dashboard />} />
         <Route path="/book-management" element={<BookManagement />} /> {/* ✅ new route */}
+        <Route path="/bookmarks" element={<BookMarks/>}/>
+        <Route path="/add-announcement" element={<AddAnnouncement />} />
+        {/* <Route path="/bookmarkProvider" element={<BookMarkProvider/>}/> */}
 
       </Routes>
     </Router>

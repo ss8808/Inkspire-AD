@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './ServiceDescription.css';
 import Navigation from '../HomePage/Navigation';
-import { useCart } from '../context/useCart';
 import { toast } from 'react-toastify';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { ImSpinner2 } from 'react-icons/im';
@@ -11,7 +10,6 @@ const ServiceDescription = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { book } = location.state || {};
-  const { addToCart, cartItems } = useCart();
 
   const token = sessionStorage.getItem('authToken');
   const userId = sessionStorage.getItem('userId');
@@ -19,15 +17,15 @@ const ServiceDescription = () => {
   const [bookmarkId, setBookmarkId] = useState(null);
   const [loadingBookmarkStatus, setLoadingBookmarkStatus] = useState(true);
   const [bookmarkActionLoading, setBookmarkActionLoading] = useState(false);
-
-  const alreadyInCart = cartItems.find((item) => item.id === book.id);
+  const [addingToCart, setAddingToCart] = useState(false);
+  const [alreadyInCart, setAlreadyInCart] = useState(false); // Local check if needed
 
   useEffect(() => {
     if (!book || !userId || !token) return;
 
     const fetchBookmarkStatus = async () => {
       try {
-        const res = await fetch(`http://localhost:5136/api/Bookmark/${userId}`, {
+        const res = await fetch(`https://localhost:7188/api/Bookmark/${userId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -56,7 +54,6 @@ const ServiceDescription = () => {
       return;
     }
 
-    // 🛡️ Prevent toggle until initial bookmark status is loaded
     if (loadingBookmarkStatus) {
       toast.info("Please wait, checking bookmark status...");
       return;
@@ -66,7 +63,7 @@ const ServiceDescription = () => {
       setBookmarkActionLoading(true);
 
       if (bookmarked && bookmarkId) {
-        const res = await fetch(`http://localhost:5136/api/Bookmark/${bookmarkId}/user/${userId}`, {
+        const res = await fetch(`https://localhost:7188/api/Bookmark/${bookmarkId}/user/${userId}`, {
           method: 'DELETE',
           headers: { Authorization: `Bearer ${token}` }
         });
@@ -77,7 +74,7 @@ const ServiceDescription = () => {
         setBookmarked(false);
         setBookmarkId(null);
       } else {
-        const res = await fetch(`http://localhost:5136/api/Bookmark/${userId}`, {
+        const res = await fetch(`https://localhost:7188/api/Bookmark/${userId}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -104,9 +101,41 @@ const ServiceDescription = () => {
     }
   };
 
-  if (!book) {
-    return <p className="error-message">Book not found.</p>;
-  }
+  const handleAddToCart = async () => {
+    if (!userId || !token) {
+      toast.error("Please log in to add to cart.");
+      navigate('/login');
+      return;
+    }
+
+    try {
+      setAddingToCart(true);
+      const res = await fetch(`https://localhost:7188/api/Cart/${userId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ bookId: book.id, quantity: 1 })
+      });
+
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(errText || "Failed to add to cart");
+      }
+
+      toast.success("Book added to cart!");
+      setAlreadyInCart(true);
+      navigate('/cart');
+    } catch (err) {
+      console.error("Add to cart error:", err.message);
+      toast.error("Could not add to cart.");
+    } finally {
+      setAddingToCart(false);
+    }
+  };
+
+  if (!book) return <p className="error-message">Book not found.</p>;
 
   return (
     <>
@@ -116,7 +145,7 @@ const ServiceDescription = () => {
           <div className="service-hero">
             <div className="image-wrapper">
               <img
-                src={`http://localhost:5136/${book.coverImageUrl}`}
+                src={`https://localhost:7188/${book.coverImageUrl}`}
                 alt={book.title}
                 className="service-cover"
               />
@@ -172,15 +201,17 @@ const ServiceDescription = () => {
               <div className="secondary-actions">
                 <button
                   className="cart-button"
-                  disabled={alreadyInCart}
-                  onClick={() => {
-                    if (!alreadyInCart) {
-                      addToCart(book);
-                      navigate('/cart');
-                    }
-                  }}
+                  disabled={addingToCart || alreadyInCart}
+                  onClick={handleAddToCart}
                 >
-                  🛒 {alreadyInCart ? 'Added' : 'Add to Cart'}
+                  {addingToCart ? (
+                    <>
+                      <ImSpinner2 className="spinner" />
+                      Adding...
+                    </>
+                  ) : (
+                    `🛒 ${alreadyInCart ? 'Added' : 'Add to Cart'}`
+                  )}
                 </button>
                 <button className="guidelines-button">📘 Content Guidelines</button>
               </div>

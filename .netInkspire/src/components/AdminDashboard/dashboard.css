@@ -81,6 +81,8 @@ body {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 24px;
+  position: relative;
+  top: 19.2px;
 }
 
 .logout {
