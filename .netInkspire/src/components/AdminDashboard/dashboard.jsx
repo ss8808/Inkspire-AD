@@ -1,32 +1,15 @@
 import React, { useState } from 'react';
 import './Dashboard.css';
-import {
-  FaTachometerAlt,
-  FaBook,
-  FaShoppingCart,
-  FaBullhorn,
-  FaPercentage,
-  FaBars
-} from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { FaBars } from 'react-icons/fa';
+import Sidebar from './Sidebar';
 
 export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const navigate = useNavigate();
-  const handleLogout = () => {
-    // Clear session data
-    sessionStorage.clear();
-    // In a real app this would redirect to login
-    alert("Logged out successfully");
-    navigate('/login');
-  };
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
-  // Close sidebar when clicking outside on mobile
   const closeSidebar = () => {
     if (window.innerWidth < 992) {
       setSidebarOpen(false);
@@ -35,61 +18,13 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-container">
-      {/* Mobile sidebar backdrop */}
-      {sidebarOpen && (
-        <div className="sidebar-backdrop" onClick={closeSidebar}></div>
-      )}
-
-      {/* Sidebar */}
-      <aside className={`sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
-        <div className="logo">Inkspire</div>
-        
-        <nav>
-          <ul>
-            <li className="active">
-              <a href="/admin">
-                <FaTachometerAlt className="sidebar-icon" />
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <a href="/book-management">
-                <FaBook className="sidebar-icon" />
-                Manage Books
-              </a>
-            </li>
-            <li>
-              <a href="/order-tracker">
-                <FaShoppingCart className="sidebar-icon" />
-                Manage Orders
-              </a>
-            </li>
-            <li>
-              <a href="/book-management">
-                <FaBullhorn className="sidebar-icon" />
-                Manage Announcements
-              </a>
-            </li>
-            <li>
-              <a href="/discount">
-                <FaPercentage className="sidebar-icon" />
-                Manage Discount
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </aside>
+      <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
 
       {/* Main content */}
       <div className="main-content">
         <div className="top-bar">
-          {/* Mobile menu button */}
           <button className="menu-toggle" onClick={toggleSidebar}>
             <FaBars />
-          </button>
-          
-          <button className="logout" onClick={handleLogout}>
-            Logout
           </button>
         </div>
 
@@ -147,7 +82,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Announcements Section (in a separate row) */}
+        {/* Announcements Section */}
         <div className="announcements">
           <p>Active Announcements</p>
           <div className="announcement-list">

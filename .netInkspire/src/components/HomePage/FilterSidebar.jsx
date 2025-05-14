@@ -2,7 +2,7 @@ import React from 'react';
 import './FilterSidebar.css';
 
 const FilterSidebar = ({ filters = { search: '', genre: [], availability: [], minPrice: '', tags: [] }, setFilters = () => {} }) => {
-  const genres = ['Fiction', 'Non-Fiction', 'Mystery', 'Science Fiction', 'Romance', 'Biography'];
+  const genres = ['Fiction', 'Drama', 'Horror', 'Science Fiction', 'Romance', 'Biography'];
   const availability = ['In Stock', 'Library Access'];
   const tags = ['Bestseller', 'Award Winner', 'New Release', 'New Arrival', 'Coming Soon'];
 

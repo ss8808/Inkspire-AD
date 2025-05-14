@@ -28,8 +28,13 @@ body {
 h1, h2, h3, h4 {
   font-family: var(--font-family);
 }
+
 html, body, #root {
+  margin: 0;
+  padding: 0;
   height: auto;
   min-height: 100vh;
-  overflow-y: auto;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  width: 100%;
 }

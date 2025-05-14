@@ -235,7 +235,7 @@ const ServiceDescription = () => {
               </div>
 
               <div className="actions">
-                <button className="start-button">Start reading</button>
+                
                 {loadingBookmarkStatus ? (
                   <button className="bookmark-button" disabled>
                     <ImSpinner2 className="spinner" />
@@ -276,7 +276,7 @@ const ServiceDescription = () => {
                     `🛒 ${alreadyInCart ? 'Added' : 'Add to Cart'}`
                   )}
                 </button>
-                <button className="guidelines-button">📘 Content Guidelines</button>
+                
               </div>
 
               {/* Review Section */}

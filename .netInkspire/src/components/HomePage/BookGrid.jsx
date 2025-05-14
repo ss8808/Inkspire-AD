@@ -72,7 +72,7 @@ const BookGrid = () => {
     }
 
     if (filters.genre.length > 0) {
-      result = result.filter(book => filters.genre.includes(book.genre));
+      result = result.filter(book => filters.genre.includes(book.format));
     }
 
     if (filters.availability.includes('In Stock')) {

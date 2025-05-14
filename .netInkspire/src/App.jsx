@@ -1,4 +1,7 @@
 import React from 'react';
+
+import './index.css'; 
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import HomePage from './components/HomePage/HomePage';
@@ -22,6 +25,8 @@ import AddAnnouncement from './components/Announcement Page/AddAnnouncement';
 import DiscountManagement from './components/DiscountManagementPage/DiscountManagement';
 import ManageAnnouncements from './components/Announcement Page/ManageAnnouncement';
 import UserAnnouncements from './components/Announcement Page/UserAnnouncements';
+import Sidebar from './components/AdminDashboard/Sidebar';
+import FilterSidebar from './components/HomePage/FilterSidebar';
 // import { BookmarkProvider } from './ServicePage/BookMarkProvider';
 // import UserAnnouncements from './components/Announcement Page/UserAnnouncements';
 
@@ -31,7 +36,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/service/:id" element={<ServiceDescription />} />
         <Route path="/order-confirmation" element={<OrderConfirmation />} />
         <Route path="/cart" element={<CartPage />} />
@@ -53,6 +58,8 @@ function App() {
         {/* <Route path="/bookmarkProvider" element={<BookMarkProvider/>}/> */}
         {/* <Route path="/announcements" element={<UserAnnouncements />} /> */}
          <Route path="/announcements" element={<UserAnnouncements/>} />
+         <Route path="/adminsidebar" element={<Sidebar/>} />
+         <Route path="/filtering" element={<FilterSidebar/>} />
 
       </Routes>
     </Router>

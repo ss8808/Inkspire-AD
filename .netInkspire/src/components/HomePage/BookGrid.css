@@ -1,6 +1,7 @@
 .book-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  /* grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); */
+   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   padding: 1.5rem;
   width: 100%;
@@ -20,7 +21,7 @@
 
 @media (max-width: 1024px) {
   .book-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+   grid-template-columns: repeat(3, 1fr);
     gap: 1.2rem;
     padding: 1.2rem;
   }
@@ -28,8 +29,7 @@
 
 @media (max-width: 768px) {
   .book-grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    padding: 1rem;
+    grid-template-columns: repeat(2, 1fr);    padding: 1rem;
   }
 }
 

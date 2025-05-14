@@ -16,13 +16,41 @@
   padding: 3rem 2rem;
   box-sizing: border-box;
   position:relative;
-  top:100px;
+  /* top:70px; */
   
 }
 
 .service-container {
-  max-width: 1200px;
+  /* max-width: 1200px; */
   width: 100%;
+}
+.book-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.book-tag {
+  background-color: var(--accent-color);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+}
+
+.book-tag.award {
+  background-color: #0077cc;
+}
+.book-tag.new {
+  background-color: #28a745;
+}
+.book-tag.arrival {
+  background-color: #6f42c1;
+}
+.book-tag.soon {
+  background-color: #f39c12;
 }
 
 .service-hero {
@@ -39,7 +67,7 @@
   position: relative;
   overflow: hidden;
   border-radius: 16px;
-  max-width: 320px;
+  max-width: 380px;
   transition: transform 0.3s ease;
   cursor: pointer;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
@@ -73,6 +101,7 @@
   display: block;
   height: auto;
   border-radius: 16px;
+  height:400px;
 }
 
 .service-info {

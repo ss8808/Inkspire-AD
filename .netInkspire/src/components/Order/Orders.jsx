@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './Order.css';
 import { toast } from 'react-toastify';
-
+// import Navigation from '../Navigation';
+import Navigation from '../HomePage/Navigation';
 export default function Orders() {
   const [orders, setOrders] = useState([]);
   const token = sessionStorage.getItem('authToken');
@@ -51,6 +52,7 @@ export default function Orders() {
 
   return (
     <div className="orders-wrapper">
+      <Navigation/>
       <h1 className="orders-title">Orders</h1>
 
       {orders.map((order) => (

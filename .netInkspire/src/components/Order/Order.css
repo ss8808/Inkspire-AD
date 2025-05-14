@@ -1,88 +1,146 @@
-.orders-wrapper {
-    background-color: #fffdf9;
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 32px 24px;
-    font-family: Georgia, serif;
-    color: #111;
-  }
-  
-  .orders-title {
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 32px;
-  }
+/* Improved Order Page CSS with orange + beige theme */
 
-  .book-list {
+:root {
+  --primary-color: #d14b0f;
+  --primary-hover: #b33f0d;
+  --background-color: #fffdf9;
+  --accent-light: #fef3e7;
+  --font-family: 'Georgia', serif;
+  --border-radius: 8px;
+}
+
+.orders-wrapper {
+  background-color: var(--background-color);
+  width: 100%;
+  margin: 40px auto;
+  padding: 32px 24px;
+  font-family: var(--font-family);
+  color: #111;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.orders-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.order-section {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: var(--border-radius);
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  overflow-x: auto;
+}
+
+.order-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+}
+
+.order-status {
+  font-size: 18px;
+  font-weight: 600;
+  min-width: 130px;
+  text-transform: capitalize;
+}
+
+.order-status.pending {
+  color: var(--primary-color);
+}
+
+.order-status.cancelled {
+  color: #999;
+  font-style: italic;
+}
+
+.order-status.completed {
+  color: #2e7d32;
+}
+
+.order-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 220px;
+}
+
+.claim-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #555;
+}
+
+.claim-code {
+  font-family: monospace;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.book-list {
   margin-top: 10px;
-  padding: 10px;
-  background: #f5f5f5;
-  border-radius: 6px;
+  padding: 12px;
+  background: var(--accent-light);
+  border-radius: var(--border-radius);
+  border: 1px solid #f0e5da;
+  width: 100%;
+  overflow-x: auto;
 }
 
 .book-item {
   font-size: 15px;
   margin-bottom: 6px;
+  color: #333;
+  white-space: nowrap;
 }
 
-  
-  .order-section {
-    margin-bottom: 24px;
+.cancel-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 15px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  align-self: flex-start;
+  margin-top: 10px;
+}
+
+.cancel-button:hover {
+  background-color: var(--primary-hover);
+}
+
+.divider {
+  border-top: 1px solid #e6dfd4;
+  margin: 20px 0;
+}
+
+@media (max-width: 600px) {
+  .orders-wrapper {
+    padding: 24px 16px;
   }
-  
+
   .order-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-  
-  .order-status {
-    font-size: 20px;
-    font-weight: 600;
-    width: 100px;
-  }
-  
-  .order-status.pending {
-    color: #d14b0f;
-  }
-  
-  .order-content {
-    display: flex;
     flex-direction: column;
     align-items: flex-start;
-    flex-grow: 1;
   }
-  
-  .claim-label {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 4px;
+
+  .order-status {
+    width: auto;
   }
-  
-  .claim-code {
-    font-family: monospace;
-    font-size: 16px;
-    font-weight: 500;
+
+  .order-content {
+    width: 100%;
   }
-  
-  .cancel-button {
-    background-color: #d14b0f;
-    color: white;
-    border: none;
-    padding: 6px 16px;
-    font-size: 15px;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  
-  .cancel-button:hover {
-    background-color: #b33f0d;
-  }
-  
-  .divider {
-    border-top: 1px solid #e6dfd4;
-    margin: 20px 0;
-  }
-  
+}
